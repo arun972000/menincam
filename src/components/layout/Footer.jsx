@@ -53,22 +53,25 @@ export default function Footer() {
           <div>
             <h3 className="mb-4 text-xs uppercase tracking-widest2 text-gold">Get in touch</h3>
             <ul className="space-y-3 text-sm text-muted">
-              <li>
-                <a href={`tel:${contact.phoneE164}`} className="flex items-center gap-2 transition-colors hover:text-ivory">
-                  <Icon name="phone" className="h-4 w-4 text-gold" /> {contact.phoneDisplay}
-                </a>
-              </li>
+              {contact.people.map((p) => (
+                <li key={p.id}>
+                  <a href={`tel:${p.phoneE164}`} className="flex items-center gap-2 transition-colors hover:text-ivory">
+                    <Icon name="phone" className="h-4 w-4 text-gold" /> {p.phoneDisplay}
+                    <span className="text-xs text-muted/80">· {p.name.split(' ')[0]}</span>
+                  </a>
+                </li>
+              ))}
               <li>
                 <a href={`mailto:${contact.email}`} className="flex items-center gap-2 transition-colors hover:text-ivory">
                   <Icon name="mail" className="h-4 w-4 text-gold" /> {contact.email}
                 </a>
               </li>
-              <li className="flex items-start gap-2">
-                <Icon name="pin" className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                <span>{contact.addressLines.join(', ')}</span>
-              </li>
               <li className="flex items-center gap-2">
-                <Icon name="clock" className="h-4 w-4 text-gold" /> {contact.hours}
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal/60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-teal" />
+                </span>
+                {contact.hours}
               </li>
             </ul>
           </div>

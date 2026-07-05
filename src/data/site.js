@@ -21,19 +21,40 @@ export const brand = {
 };
 
 export const contact = {
-  // TODO: replace with the real Men in Cam numbers / addresses.
-  phoneDisplay: '+91 98765 43210',
-  phoneE164: '+919876543210',
+  // The two founders — both personally handle every business enquiry.
+  // `avatar` picks the animated character variant (see ui/AvatarCharacter).
+  people: [
+    {
+      id: 'shakthi',
+      name: 'Shakthi Kumar S',
+      role: 'Co-Founder & CEO',
+      bio: 'Shakthi looks after bookings, budgets and the big picture — call him and your date is as good as planned.',
+      phoneDisplay: '+91 70105 33561',
+      phoneE164: '+917010533561',
+      whatsapp: '917010533561',
+      avatar: 'a',
+    },
+    {
+      id: 'arun',
+      name: 'Arun Pandian M',
+      role: 'Co-Founder & CEO',
+      bio: 'Arun handles enquiries, crews and delivery — message him anytime and he’ll sort your event end to end.',
+      phoneDisplay: '+91 74492 05596',
+      phoneE164: '+917449205596',
+      whatsapp: '917449205596',
+      avatar: 'b',
+    },
+  ],
+  // Primary line (first founder) — used wherever only one number fits.
+  phoneDisplay: '+91 70105 33561',
+  phoneE164: '+917010533561',
   // WhatsApp number in international format WITHOUT the leading "+" or spaces.
-  whatsappNumber: '919876543210',
+  whatsappNumber: '917010533561',
   whatsappPrefill:
     'Hi Men in Cam! I want to book photos/video for my event. Can you check if you are free?',
-  email: 'hello@menincam.example.com',
-  addressLines: ['Men in Cam Studio', '12 Cathedral Road', 'Chennai 600086, Tamil Nadu'],
-  // Paste your own Google Maps "embed" src here (Maps → Share → Embed a map).
-  mapEmbedSrc:
-    'https://www.google.com/maps?q=Chennai%2C%20Tamil%20Nadu&output=embed',
-  hours: 'Mon–Sat · 10:00 AM – 7:00 PM',
+  email: 'studio@menincam.in',
+  // No street address or map by request — we come to you, city base only.
+  hours: 'Open 24/7 — call anytime',
 };
 
 export const social = {

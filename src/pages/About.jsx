@@ -4,11 +4,15 @@ import Section, { SectionHeading } from '../components/ui/Section';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import LazyImage from '../components/ui/LazyImage';
 import Counter from '../components/ui/Counter';
+import AvatarCharacter from '../components/ui/AvatarCharacter';
+import Button from '../components/ui/Button';
+import Icon from '../components/ui/Icon';
 import CTABand from '../components/sections/CTABand';
-import { founders, team, approach } from '../data/team';
+import { founders, approach } from '../data/team';
 import { awards } from '../data/press';
 import { stats } from '../data/stats';
-import { brand } from '../data/site';
+import { brand, contact } from '../data/site';
+import { track } from '../lib/track';
 
 export default function About() {
   return (
@@ -82,31 +86,49 @@ export default function About() {
         </RevealGroup>
       </Section>
 
-      {/* Team */}
+      {/* Founders — the two of us handle every enquiry */}
       <Section className="bg-surface/30">
         <SectionHeading
-          eyebrow="The team"
-          title="The people behind the camera"
-          intro="A small, friendly team — not random freelancers. You’ll know exactly who’s covering your event."
+          eyebrow="Leadership"
+          title="Two founders, zero middlemen"
+          intro="Every business enquiry comes straight to one of us — call, WhatsApp or email either founder directly, any hour of the day. (Psst — say hi to our avatars, they're friendly.)"
+          align="center"
+          className="mx-auto"
         />
-        <RevealGroup className="mt-12 grid grid-cols-2 gap-5 lg:grid-cols-4">
-          {team.map((member) => (
-            <RevealItem key={member.id} className="group">
-              <div className="overflow-hidden rounded-2xl">
-                <LazyImage
-                  src={member.image}
-                  alt={member.alt}
-                  ratio={0.82}
-                  imgClassName="transition-transform duration-700 ease-cinema group-hover:scale-105"
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                />
+        <RevealGroup className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2">
+          {contact.people.map((p) => (
+            <RevealItem key={p.id} className="panel flex flex-col items-center p-8 text-center">
+              <AvatarCharacter variant={p.avatar} name={p.name} size={168} />
+              <h3 className="mt-5 font-serif text-2xl text-ivory">{p.name}</h3>
+              <p className="mt-1 text-xs uppercase tracking-widest2 text-gold">{p.role}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{p.bio}</p>
+              <div className="mt-6 flex flex-wrap justify-center gap-2.5">
+                <Button
+                  href={`tel:${p.phoneE164}`}
+                  size="sm"
+                  onClick={() => track('call_click', { person: p.id })}
+                >
+                  <Icon name="phone" className="h-4 w-4" /> {p.phoneDisplay}
+                </Button>
+                <Button
+                  href={`https://wa.me/${p.whatsapp}?text=${encodeURIComponent(`Hi ${p.name.split(' ')[0]}! I'd like to enquire about photos/video for my event.`)}`}
+                  variant="whatsapp"
+                  size="sm"
+                  onClick={() => track('whatsapp_click', { source: 'about', person: p.id })}
+                >
+                  <Icon name="whatsapp" filled className="h-4 w-4" /> WhatsApp
+                </Button>
               </div>
-              <h3 className="mt-4 font-serif text-xl text-ivory">{member.name}</h3>
-              <p className="text-xs uppercase tracking-widest2 text-gold">{member.role}</p>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{member.bio}</p>
             </RevealItem>
           ))}
         </RevealGroup>
+        <p className="mt-8 text-center text-sm text-muted">
+          <span className="mr-1.5 inline-block h-2 w-2 animate-pulse rounded-full bg-teal align-middle" />
+          {contact.hours} ·{' '}
+          <a href={`mailto:${contact.email}`} className="text-gold transition-colors hover:underline">
+            {contact.email}
+          </a>
+        </p>
       </Section>
 
       {/* Behind the scenes + awards */}
