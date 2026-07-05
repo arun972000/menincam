@@ -197,10 +197,14 @@ export default function Hero() {
               type="button"
               aria-label={`Show slide ${i + 1}`}
               onClick={() => setFrame(i)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === frame ? 'w-7 bg-gold' : 'w-3 bg-ivory/40 hover:bg-ivory/70'
-              }`}
-            />
+              className="group/tick flex h-6 items-center"
+            >
+              <span
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === frame ? 'w-7 bg-gold' : 'w-3 bg-ivory/40 group-hover/tick:bg-ivory/70'
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}

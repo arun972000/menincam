@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { SectionHeading } from '../ui/Section';
@@ -27,7 +27,10 @@ function ServiceCard({ s, index, className = '' }) {
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
       <div className="pointer-events-none absolute inset-3 rounded-2xl border border-white/15 transition-colors duration-500 group-hover:border-white/60" />
-      <span className="pointer-events-none absolute right-5 top-3 select-none font-display text-6xl font-extrabold leading-none text-white/20">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute right-5 top-3 select-none font-display text-6xl font-extrabold leading-none text-white/20"
+      >
         {String(index + 1).padStart(2, '0')}
       </span>
       <div className="absolute inset-x-0 bottom-0 p-6">
@@ -58,7 +61,9 @@ function HorizontalTrack() {
   const { scrollYProgress } = useScroll({ target: targetRef });
   const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
 
-  useEffect(() => {
+  // useLayoutEffect: measure BEFORE first paint so the section renders at its
+  // real height immediately — no layout shift pushing the footer around (CLS).
+  useLayoutEffect(() => {
     const calc = () => {
       if (!trackRef.current) return;
       setDistance(Math.max(0, trackRef.current.scrollWidth - window.innerWidth + 32));

@@ -54,15 +54,29 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <!--
-      Fonts: Google Fonts with font-display: swap (set via &display=swap below).
-      Preconnect to cut the DNS/TLS handshake from the critical path.
+      Fonts: Google Fonts loaded ASYNC (media=print → all on load) so the CSS
+      never render-blocks first paint; display=optional shows system text meanwhile.
+      Preconnect cuts the DNS/TLS handshake from the critical path.
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500;600&display=optional"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500;600&display=optional"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500;600&display=optional"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Preconnect to the image CDN so the LCP hero poster fetches fast -->
     <link rel="preconnect" href="https://images.unsplash.com" />

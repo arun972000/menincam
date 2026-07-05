@@ -11,7 +11,11 @@ export default function Logo({ className = '', onDark = false }) {
   // photo (the ivory token flips to near-black in Daylight and would vanish).
   const ring = onDark ? '#ffffff' : 'rgb(var(--c-ivory))';
   return (
-    <Link to="/" className={`group flex items-center gap-2.5 ${className}`} aria-label={`${brand.name} home`}>
+    <Link
+      to="/"
+      className={`group flex items-center gap-2.5 ${className}`}
+      aria-label={`${brand.name} — Photo & Video — home`}
+    >
       {/* Camera-lens mark */}
       <span className="relative grid h-9 w-9 place-items-center transition-transform duration-300 ease-cinema group-hover:rotate-12">
         <svg viewBox="0 0 40 40" className="h-9 w-9" fill="none" aria-hidden="true">
