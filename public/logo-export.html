@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Men in Cam — Logo PNG Exporter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; background: #0b0b0d; color: #f3f1ec;
+        font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;
+        align-items: center; gap: 22px; padding: 40px 20px;
+      }
+      h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 22px; margin: 0; }
+      p { color: #9c968c; margin: 0; font-size: 14px; max-width: 560px; text-align: center; }
+      .preview { border: 1px solid #28262c; border-radius: 16px; padding: 18px; background: #161519; }
+      .preview canvas { max-width: 100%; height: auto; display: block; }
+      .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; }
+      label { font-size: 13px; color: #9c968c; }
+      select, button {
+        font: inherit; font-size: 14px; border-radius: 999px; border: 1px solid #28262c;
+        background: #161519; color: #f3f1ec; padding: 10px 16px; cursor: pointer;
+      }
+      button.primary { background: #e01e2b; border-color: #e01e2b; color: #fff; font-weight: 600; }
+      button:hover { border-color: #e01e2b; }
+      .swatches { display: flex; gap: 8px; }
+      .swatches button { padding: 8px 14px; }
+      .swatches button[aria-pressed="true"] { border-color: #e01e2b; color: #fff; }
+      code { background: #161519; padding: 2px 6px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <h1>Men in Cam — Logo PNG exporter</h1>
+    <p>Renders the logo with the real <strong>Plus Jakarta Sans</strong> font and downloads a crisp PNG at the size you pick. Choose a background and scale, then download.</p>
+
+    <div class="preview"><canvas id="cv" width="1000" height="260"></canvas></div>
+
+    <div class="row swatches" id="bg">
+      <button data-bg="transparent" aria-pressed="true">Transparent</button>
+      <button data-bg="black">On black</button>
+      <button data-bg="light">On white</button>
+    </div>
+
+    <div class="row">
+      <label for="scale">Resolution</label>
+      <select id="scale">
+        <option value="2">2× — 1000 px wide</option>
+        <option value="4" selected>4× — 2000 px wide</option>
+        <option value="8">8× — 4000 px wide</option>
+        <option value="16">16× — 8000 px wide</option>
+      </select>
+      <button class="primary" id="dl">Download PNG ⬇</button>
+    </div>
+
+    <p>Tip: <strong>Transparent</strong> works on any background. The vector originals are <code>logo.svg</code>, <code>logo-on-black.svg</code>, <code>logo-on-light.svg</code> in this folder — use those wherever SVG is accepted (sharpest of all).</p>
+
+    <script>
+      const W = 500, H = 130;
+      let bg = 'transparent';
+
+      function drawLogo(ctx, scale, variant) {
+        const c = ctx.canvas;
+        c.width = W * scale;
+        c.height = H * scale;
+        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+
+        let textMain = '#F3F1EC', textSub = '#9C968C', lens = '#F3F1EC';
+        if (variant === 'black') { ctx.fillStyle = '#0B0B0D'; ctx.fillRect(0, 0, W, H); }
+        if (variant === 'light') { ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, W, H); textMain = '#1A1614'; textSub = '#6B5F57'; lens = '#1A1614'; }
+
+        // Lens mark
+        ctx.save();
+        ctx.translate(67, 65);
+        ctx.strokeStyle = lens; ctx.lineWidth = 6.5;
+        ctx.beginPath(); ctx.arc(0, 0, 44, 0, Math.PI * 2); ctx.stroke();
+        ctx.globalAlpha = 0.4; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.arc(0, 0, 27, 0, Math.PI * 2); ctx.stroke();
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = '#E01E2B'; ctx.beginPath(); ctx.arc(0, 0, 15, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.arc(10, -10, 5, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+
+        // Wordmark
+        ctx.textBaseline = 'alphabetic';
+        ctx.font = "800 48px 'Plus Jakarta Sans', sans-serif";
+        try { ctx.letterSpacing = '-1.5px'; } catch (e) {}
+        ctx.fillStyle = textMain;
+        ctx.fillText('MEN IN ', 132, 60);
+        const w = ctx.measureText('MEN IN ').width;
+        ctx.fillStyle = '#E01E2B';
+        ctx.fillText('CAM', 132 + w, 60);
+
+        ctx.font = "600 15.5px 'Plus Jakarta Sans', sans-serif";
+        try { ctx.letterSpacing = '7px'; } catch (e) {}
+        ctx.fillStyle = textSub;
+        ctx.fillText('PHOTO & VIDEO', 134, 91);
+      }
+
+      const cv = document.getElementById('cv');
+      const ctx = cv.getContext('2d');
+
+      function render() { drawLogo(ctx, 2, bg); }
+
+      document.getElementById('bg').addEventListener('click', (e) => {
+        const b = e.target.closest('button'); if (!b) return;
+        bg = b.dataset.bg;
+        [...e.currentTarget.children].forEach((x) => x.setAttribute('aria-pressed', x === b));
+        render();
+      });
+
+      document.getElementById('dl').addEventListener('click', async () => {
+        const scale = parseInt(document.getElementById('scale').value, 10);
+        const out = document.createElement('canvas');
+        const octx = out.getContext('2d');
+        drawLogo(octx, scale, bg);
+        out.toBlob((blob) => {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `men-in-cam-logo-${bg}-${W * scale}px.png`;
+          a.click();
+          URL.revokeObjectURL(a.href);
+        }, 'image/png');
+      });
+
+      // Wait for the real font before first paint.
+      (async () => {
+        try {
+          await document.fonts.load("800 48px 'Plus Jakarta Sans'");
+          await document.fonts.load("600 16px 'Plus Jakarta Sans'");
+          await document.fonts.ready;
+        } catch (e) {}
+        render();
+      })();
+    </script>
+  </body>
+</html>

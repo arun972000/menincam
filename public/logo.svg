@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 130" width="500" height="130" role="img" aria-label="Men in Cam — Photo & Video">
+  <title>Men in Cam — Photo &amp; Video</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&amp;display=swap');
+    .wm { font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif; }
+  </style>
+
+  <!-- Camera lens mark -->
+  <g transform="translate(67,65)">
+    <circle r="44" fill="none" stroke="#F3F1EC" stroke-width="6.5"/>
+    <circle r="27" fill="none" stroke="#F3F1EC" stroke-width="4" opacity="0.4"/>
+    <circle r="15" fill="#E01E2B"/>
+    <circle cx="10" cy="-10" r="5" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text class="wm" x="132" y="60" font-size="48" font-weight="800" letter-spacing="-1.5" fill="#F3F1EC">MEN IN <tspan fill="#E01E2B">CAM</tspan></text>
+  <text class="wm" x="134" y="91" font-size="15.5" font-weight="600" letter-spacing="7" fill="#9C968C">PHOTO &amp; VIDEO</text>
+</svg>

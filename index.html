@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B0B0D" />
+
+    <!-- Apply saved user preferences (Settings panel) BEFORE first paint so
+         there is never a flash of the wrong theme. Mirrors PreferencesContext. -->
+    <script>
+      (function () {
+        try {
+          var p = JSON.parse(localStorage.getItem('mic:prefs:v1') || '{}');
+          var d = document.documentElement;
+          var light =
+            p.theme === 'daylight' ||
+            (p.theme === 'system' && matchMedia('(prefers-color-scheme: light)').matches);
+          if (light) {
+            d.classList.add('theme-light');
+            document
+              .querySelector('meta[name="theme-color"]')
+              .setAttribute('content', '#FFF8F1');
+          }
+          if (p.accent && p.accent !== 'signature') d.dataset.accent = p.accent;
+          if (p.motion === 'calm') d.dataset.motion = 'reduced';
+        } catch (e) {
+          /* first visit / private mode — defaults apply */
+        }
+      })();
+    </script>
+
+    <!-- Primary SEO meta (per-page values are managed at runtime by <Seo />) -->
+    <title>Men in Cam — Photo & Video for Every Event</title>
+    <meta
+      name="description"
+      content="Men in Cam covers photos and video for all kinds of events — weddings, birthdays, parties and corporate days in Chennai. Natural photos, easy booking. Send your date for a quick quote."
+    />
+    <meta name="author" content="Men in Cam" />
+    <link rel="canonical" href="https://menincam.example.com/" />
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Men in Cam" />
+    <meta property="og:title" content="Men in Cam — Photo & Video for Every Event" />
+    <meta
+      property="og:description"
+      content="Photos and video for all kinds of events — weddings, birthdays, parties and more. Send your date for a quick quote."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=70"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!--
+      Fonts: Google Fonts with font-display: swap (set via &display=swap below).
+      Preconnect to cut the DNS/TLS handshake from the critical path.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Preconnect to the image CDN so the LCP hero poster fetches fast -->
+    <link rel="preconnect" href="https://images.unsplash.com" />
+
+    <!-- Structured data for rich results -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Men in Cam",
+        "image": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=70",
+        "description": "Photo and video for all kinds of events — weddings, birthdays, parties and corporate events in Chennai.",
+        "@id": "https://menincam.example.com",
+        "url": "https://menincam.example.com",
+        "telephone": "+91-98765-43210",
+        "priceRange": "₹₹",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Chennai",
+          "addressRegion": "Tamil Nadu",
+          "addressCountry": "IN"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

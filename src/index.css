@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────────────────────────────────────────────────────────
+   THEME TOKENS — "Midnight" (Men in Cam)
+   The whole site reads colour through these CSS variables (mapped in
+   tailwind.config.js). Bold & cinematic: a near-black canvas, crisp off-white
+   text, one high-energy RED action accent (camera-iconic on black), and a teal
+   trust cue. Token names are kept (`ink`, `ivory`, `gold`) so swapping the
+   VALUES re-skins the whole site. Change `--c-gold` alone to swap the accent.
+   Add class="theme-light" to <html> for the old bright "Daylight" variant.
+   Values are space-separated RGB channels so Tailwind's <alpha-value> works.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  --c-ink: 11 11 13; /* #0B0B0D near-black — page background */
+  --c-surface: 22 21 25; /* #161519 raised cards / fields */
+  --c-ivory: 243 241 236; /* #F3F1EC off-white — primary text */
+  --c-muted: 156 150 140; /* #9C968C grey — secondary text */
+  --c-gold: 224 30 43; /* #E01E2B bold red — action accent (white text clears AA) */
+  --c-line: 40 38 44; /* #28262C hairline borders */
+  --c-teal: 45 212 191; /* #2DD4BF teal — trust / WhatsApp cue */
+}
+
+/* Optional bright variant — add class="theme-light" to <html> for "Daylight".
+   Visitors can switch themes themselves via the Settings panel (bottom-right);
+   the choice is saved on the device and applied pre-paint by index.html. */
+.theme-light {
+  --c-ink: 255 248 241;
+  --c-surface: 255 255 255;
+  --c-ivory: 26 22 20;
+  --c-muted: 107 95 87;
+  --c-gold: 214 62 8;
+  --c-line: 240 228 216;
+  --c-teal: 10 122 108;
+}
+
+/* ── User-selectable accent (Settings panel) ─────────────────────────────────
+   html[data-accent=…] overrides the action accent in BOTH themes (the
+   attribute selector out-specifies .theme-light). --c-accent-soft is the mid
+   stop of .text-gold-gradient so gradient headlines follow the accent too.
+   Every accent keeps white button text at WCAG AA contrast. */
+:root {
+  --c-accent-soft: #ff5a6a;
+}
+.theme-light {
+  --c-accent-soft: #ff8a4d;
+}
+html[data-accent='ocean'] {
+  --c-gold: 37 99 235; /* #2563EB */
+  --c-accent-soft: #60a5fa;
+}
+html[data-accent='violet'] {
+  --c-gold: 109 40 217; /* #6D28D9 */
+  --c-accent-soft: #a78bfa;
+}
+html[data-accent='rose'] {
+  --c-gold: 219 39 119; /* #DB2777 */
+  --c-accent-soft: #f472b6;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Native form controls (date picker, selects) match the active theme. */
+    color-scheme: dark;
+  }
+  html.theme-light {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-ink text-ivory font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-bold tracking-tight;
+  }
+
+  /* Accessible, visible focus ring for keyboard users. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-ink;
+  }
+
+  /* Respect the OS reduced-motion setting globally. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* "Calm" motion mode chosen in the Settings panel — mirrors the OS rule so
+     users on any device can opt out of animation. */
+  html[data-motion='reduced'] *,
+  html[data-motion='reduced'] *::before,
+  html[data-motion='reduced'] *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  /* Constrained content width used across sections. */
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Small uppercase label / eyebrow above headings. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest2 text-gold;
+  }
+
+  /* Thin gold rule used as a decorative divider. */
+  .rule-gold {
+    @apply h-px w-12 bg-gold/70;
+  }
+
+  /* Accent gradient text for bold accent words (follows the chosen accent). */
+  .text-gold-gradient {
+    background-image: linear-gradient(
+      100deg,
+      rgb(var(--c-gold)) 0%,
+      var(--c-accent-soft) 50%,
+      rgb(var(--c-gold)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Reusable surface card with a soft lift + shadow on hover. */
+  .card-premium {
+    @apply relative rounded-card border border-line bg-surface shadow-soft transition-all duration-300 ease-cinema;
+  }
+  .card-premium:hover {
+    @apply -translate-y-1 border-gold/40 shadow-lift;
+  }
+
+  /* Bento panel — the building block of the new layout. */
+  .panel {
+    @apply rounded-bento border border-line bg-surface shadow-soft;
+  }
+
+  /* Small rounded pill / tag. */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium text-muted;
+  }
+
+  /* Balance multi-line headings so they wrap evenly. */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Decorative oversized index numeral (e.g. 01 / 02) behind section content. */
+  .index-numeral {
+    @apply pointer-events-none select-none font-serif leading-none text-gold/10;
+  }
+
+  /* Hairline gold divider used between editorial blocks. */
+  .divider-gold {
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      rgb(var(--c-gold) / 0.4),
+      transparent
+    );
+    @apply h-px w-full;
+  }
+
+  /* Shimmer placeholder used while images load (blur-up companion). */
+  .img-skeleton {
+    background: linear-gradient(
+      100deg,
+      rgb(var(--c-surface)) 30%,
+      rgb(var(--c-line) / 0.6) 50%,
+      rgb(var(--c-surface)) 70%
+    );
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+}
+
+/* Lenis smooth-scroll (recommended base styles). */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Hide scrollbars on horizontal strips while keeping them scrollable. */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Camera-flash easter egg (Settings panel "Say cheese"). The reduced-motion
+   rules above zero its duration, so it never fires for calm users. */
+@keyframes mic-flash {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.mic-flash {
+  animation: mic-flash 0.65s ease-out forwards;
+}
+
+/* Tangerine text selection — a small on-brand detail. */
+::selection {
+  background: rgb(var(--c-gold) / 0.85);
+  color: #ffffff;
+}
+
+/* Slim, on-brand scrollbar (WebKit). */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--c-ink));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--c-line));
+  border-radius: 9999px;
+  border: 2px solid rgb(var(--c-ink));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--c-gold) / 0.6);
+}

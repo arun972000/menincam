@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://menincam.example.com/sitemap.xml
