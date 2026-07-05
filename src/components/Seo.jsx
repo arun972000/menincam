@@ -17,12 +17,13 @@ function setMeta(attr, key, content) {
   el.setAttribute('content', content);
 }
 
-export default function Seo({ title, description, image, path = '/' }) {
+export default function Seo({ title, description, image, path = '/', keywords, jsonLd }) {
   useEffect(() => {
     const fullTitle = title ? `${title} · ${brand.name}` : `${brand.name} — Photo & Video for Every Event`;
     document.title = fullTitle;
 
     setMeta('name', 'description', description);
+    if (keywords) setMeta('name', 'keywords', keywords);
     setMeta('property', 'og:title', fullTitle);
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:type', 'website');
@@ -39,7 +40,22 @@ export default function Seo({ title, description, image, path = '/' }) {
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', `https://menincam.example.com${path}`);
-  }, [title, description, image, path]);
+
+    // Per-page structured data (FAQ, service lists…) for rich search results.
+    const JSONLD_ID = 'seo-page-jsonld';
+    let script = document.getElementById(JSONLD_ID);
+    if (jsonLd) {
+      if (!script) {
+        script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = JSONLD_ID;
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(jsonLd);
+    } else if (script) {
+      script.remove();
+    }
+  }, [title, description, image, path, keywords, jsonLd]);
 
   return null;
 }

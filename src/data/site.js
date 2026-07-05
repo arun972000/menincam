@@ -54,7 +54,7 @@ export const contact = {
     'Hi Men in Cam! I want to book photos/video for my event. Can you check if you are free?',
   email: 'studio@menincam.in',
   // No street address or map by request — we come to you, city base only.
-  hours: 'Open 24/7 — call anytime',
+  hours: 'Mon–Sun · 8 AM – 8 PM',
 };
 
 export const social = {

@@ -13,7 +13,10 @@ export default function CTABand({
   body = 'Send your date and what you’re planning. We’ll reply within 24 hours with a simple quote — no obligation.',
 }) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-gold to-[#a3101e]">
+    <section className="relative overflow-hidden bg-gold">
+      {/* Depth gradient built from overlays (not a second colour) so the band
+          follows whichever accent the visitor picked in Settings. */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/25" />
       {/* Soft light blooms for depth */}
       <div className="pointer-events-none absolute -left-20 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
       <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
@@ -28,7 +31,9 @@ export default function CTABand({
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{body}</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Button to="/contact" size="lg" className="!bg-white !text-ink hover:!bg-white/90">
+            {/* Fixed dark text — the ink token flips to cream in Daylight and
+                would vanish on this white button. */}
+            <Button to="/contact" size="lg" className="!bg-white !text-[#1A1614] hover:!bg-white/90">
               Get a quote <ArrowIcon />
             </Button>
             <Button

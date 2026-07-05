@@ -207,7 +207,7 @@ export default function MobileTabBar() {
                 tap();
                 track('whatsapp_click', { source: 'more_sheet' });
               }}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-teal px-4 py-3.5 text-sm font-semibold text-white active:opacity-90"
+              className="flex items-center justify-center gap-2 rounded-2xl bg-teal px-4 py-3.5 text-sm font-semibold text-ink active:opacity-90"
             >
               <Icon name="whatsapp" filled className="h-5 w-5" /> WhatsApp
             </a>

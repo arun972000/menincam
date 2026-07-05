@@ -2,14 +2,12 @@ import Seo from '../components/Seo';
 import PageHeader from '../components/sections/PageHeader';
 import Section, { SectionHeading } from '../components/ui/Section';
 import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
-import LazyImage from '../components/ui/LazyImage';
 import Counter from '../components/ui/Counter';
 import AvatarCharacter from '../components/ui/AvatarCharacter';
 import Button from '../components/ui/Button';
 import Icon from '../components/ui/Icon';
 import CTABand from '../components/sections/CTABand';
 import { founders, approach } from '../data/team';
-import { awards } from '../data/press';
 import { stats } from '../data/stats';
 import { brand, contact } from '../data/site';
 import { track } from '../lib/track';
@@ -33,12 +31,21 @@ export default function About() {
       <Section>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            <LazyImage
-              src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=1100&q=70"
-              alt="The Men in Cam crew at work"
-              ratio={0.85}
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            {/* The two of us — same animated characters as the leadership
+                cards below, no stock-photo strangers. */}
+            <div className="panel relative overflow-hidden p-8 text-center sm:p-10">
+              <div className="flex items-end justify-center">
+                <AvatarCharacter variant="a" name="Shakthi Kumar S" size={150} className="-mr-3" />
+                <AvatarCharacter variant="b" name="Arun Pandian M" size={150} className="-ml-3" />
+              </div>
+              <div className="mt-5 flex flex-wrap justify-center gap-2.5">
+                <span className="chip">📸 Shakthi</span>
+                <span className="chip">🎬 Arun</span>
+              </div>
+              <p className="mt-4 text-xs text-muted">
+                Say hi — we blink, we grin, we even fire the flash.
+              </p>
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="eyebrow mb-5">
@@ -91,7 +98,7 @@ export default function About() {
         <SectionHeading
           eyebrow="Leadership"
           title="Two founders, zero middlemen"
-          intro="Every business enquiry comes straight to one of us — call, WhatsApp or email either founder directly, any hour of the day. (Psst — say hi to our avatars, they're friendly.)"
+          intro="Every business enquiry comes straight to one of us — call, WhatsApp or email either founder directly, 8 AM to 8 PM, every day of the week. (Psst — say hi to our avatars, they're friendly.)"
           align="center"
           className="mx-auto"
         />
@@ -129,34 +136,6 @@ export default function About() {
             {contact.email}
           </a>
         </p>
-      </Section>
-
-      {/* Behind the scenes + awards */}
-      <Section>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <div className="grid grid-cols-2 gap-3">
-              <LazyImage src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=70" alt="Behind the scenes — directing a shoot" ratio={0.8} className="row-span-2" />
-              <LazyImage src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=700&q=70" alt="Behind the scenes — capturing a film" ratio={1.4} />
-              <LazyImage src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=700&q=70" alt="Behind the scenes — golden hour setup" ratio={1.4} />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="eyebrow mb-5">
-              <span className="rule-gold" /> Reviews &amp; recognition
-            </p>
-            <h2 className="font-serif text-3xl text-ivory sm:text-4xl">Trusted by thousands of happy clients</h2>
-            <ul className="mt-8 space-y-5">
-              {awards.map((a) => (
-                <li key={a.title} className="flex items-baseline gap-5 border-b border-line/50 pb-5">
-                  <span className="font-serif text-2xl text-gold">{a.year}</span>
-                  <span className="text-ivory/90">{a.title}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-xs text-muted">Placeholder accolades — replace with real recognitions.</p>
-          </Reveal>
-        </div>
       </Section>
 
       <CTABand />

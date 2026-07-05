@@ -19,8 +19,10 @@ const variants = {
     'bg-gold text-white hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-12px_rgb(var(--c-gold)/0.6)]',
   outline:
     'border border-gold/60 text-ivory hover:border-gold hover:-translate-y-0.5 hover:bg-gold/10',
+  // text-ink (not white): teal is BRIGHT in Midnight and DARK in Daylight, and
+  // ink flips the opposite way — so this stays readable in both themes.
   whatsapp:
-    'bg-teal text-white hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-12px_rgb(var(--c-teal)/0.6)]',
+    'bg-teal text-ink hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-12px_rgb(var(--c-teal)/0.6)]',
   ghost: 'text-ivory/90 hover:text-gold',
 };
 

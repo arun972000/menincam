@@ -10,20 +10,20 @@ import { track } from '../lib/track';
 /**
  * Contact page: enquiry form + the two founders' direct lines. No street
  * address or map by request — we shoot on location, so the phones ARE the
- * studio. Open 24/7.
+ * studio. Open 8 AM – 8 PM, every day.
  */
 export default function Contact() {
   return (
     <>
       <Seo
         title="Contact & Get a Quote"
-        description={`Get a quote from ${brand.name} for any event in ${brand.city} and beyond — weddings, birthdays, parties, corporate and more. Call or WhatsApp the founders directly, 24/7.`}
+        description={`Get a quote from ${brand.name} for any event in ${brand.city} and beyond — weddings, birthdays, parties, corporate and more. Call or WhatsApp the founders directly, 8 AM – 8 PM every day.`}
         path="/contact"
       />
       <PageHeader
         eyebrow="Get a quote"
         title="Tell us about your event"
-        intro="Fill in a few details and we’ll get back within 24 hours with a simple price. Prefer to talk? Both founders pick up directly — day or night."
+        intro="Fill in a few details and we’ll get back within 24 hours with a simple price. Prefer to talk? Both founders pick up directly — 8 AM to 8 PM, every day of the week."
         image="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=60"
       />
 
@@ -62,7 +62,7 @@ export default function Contact() {
                       target="_blank"
                       rel="noreferrer"
                       onClick={() => track('whatsapp_click', { source: 'contact', person: p.id })}
-                      className="flex items-center justify-center gap-2 rounded-full bg-teal px-3 py-2.5 text-xs font-semibold text-white transition-opacity hover:opacity-90"
+                      className="flex items-center justify-center gap-2 rounded-full bg-teal px-3 py-2.5 text-xs font-semibold text-ink transition-opacity hover:opacity-90"
                     >
                       <Icon name="whatsapp" filled className="h-4 w-4" /> WhatsApp
                     </a>

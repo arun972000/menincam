@@ -193,7 +193,7 @@ export default function DateChecker() {
                 {eventType} · {dateLabel}. Say hi and we’ll confirm your slot.
               </p>
               <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-teal/40 bg-teal/10 px-3.5 py-1.5 text-xs font-semibold text-teal">
-                ⚡ We reply within 2 hours, 9 AM – 9 PM
+                ⚡ We reply within 2 hours, 8 AM – 8 PM
               </span>
               <div className="mt-5 flex flex-col gap-2.5">
                 <Button
