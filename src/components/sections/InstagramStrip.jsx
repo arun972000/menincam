@@ -6,7 +6,7 @@ import { social } from '../../data/site';
 
 /**
  * Instagram feed strip. Static thumbnails (lazy-loaded) linking to the profile
- * — no Instagram embed SDK, so zero third-party JS. Swap for a real feed later.
+ * with no Instagram embed SDK, so zero third-party JS. Swap for a real feed later.
  */
 export default function InstagramStrip() {
   return (

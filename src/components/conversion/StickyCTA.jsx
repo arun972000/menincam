@@ -5,7 +5,7 @@ import Button, { ArrowIcon } from '../ui/Button';
 import { openDateChecker } from '../../lib/bus';
 
 /**
- * Scroll-triggered bottom CTA bar (desktop only — mobile has the tab bar's
+ * Scroll-triggered bottom CTA bar (desktop only, mobile has the tab bar's
  * Book action instead). Appears after the visitor scrolls past the hero and
  * opens the "Check your date" flow. Dismissible, and hidden on the Contact
  * page (where the form already lives).

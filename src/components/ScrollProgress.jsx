@@ -1,7 +1,7 @@
 import { motion, useScroll, useSpring } from 'framer-motion';
 
 /**
- * Thin red scroll-progress bar pinned to the very top — a small "crafted
+ * Thin red scroll-progress bar pinned to the very top, a small "crafted
  * experience" cue. Transform-only (scaleX), so it costs nothing.
  */
 export default function ScrollProgress() {

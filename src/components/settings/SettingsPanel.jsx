@@ -6,7 +6,7 @@ import { confettiBurst } from '../../lib/confetti';
 import { EVENTS, onBus } from '../../lib/bus';
 
 /**
- * "Make it yours" — floating settings panel that lets visitors personalise the
+ * "Make it yours": floating settings panel that lets visitors personalise the
  * site: Midnight/Daylight/Auto theme, accent colour, motion level and ambient
  * effects. Sits just above the WhatsApp button. Includes a playful
  * "Say cheese" camera-flash easter egg. All choices persist on the device via
@@ -99,7 +99,7 @@ export default function SettingsPanel() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
-  // Openable from anywhere (mobile "More" sheet) — the floating trigger is
+  // Openable from anywhere (mobile "More" sheet); the floating trigger is
   // desktop-only.
   useEffect(() => onBus(EVENTS.SETTINGS, () => setOpen(true)), []);
 
@@ -113,7 +113,7 @@ export default function SettingsPanel() {
 
   return (
     <>
-      {/* Trigger — floats just above the WhatsApp button. */}
+      {/* Trigger: floats just above the WhatsApp button. */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -128,7 +128,7 @@ export default function SettingsPanel() {
       <AnimatePresence>
         {open && (
           <>
-            {/* Click-away backdrop (transparent — the panel is a popover, not a modal). */}
+            {/* Click-away backdrop (transparent: the panel is a popover, not a modal). */}
             <motion.div
               key="backdrop"
               initial={{ opacity: 0 }}
@@ -233,7 +233,7 @@ export default function SettingsPanel() {
                 disabled={prefs.calm}
                 className="w-full rounded-xl border border-gold/40 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors duration-300 hover:bg-gold/20 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                📸 Say cheese — fire the flash!
+                📸 Say cheese, fire the flash!
               </button>
               {prefs.calm && (
                 <p className="mt-1.5 text-center text-[11px] text-muted">
@@ -242,7 +242,7 @@ export default function SettingsPanel() {
               )}
 
               <p className="mt-4 text-center text-[11px] text-muted">
-                Saved on this device — tweak any time.
+                Saved on this device. Tweak any time.
               </p>
             </motion.aside>
           </>

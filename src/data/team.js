@@ -2,8 +2,8 @@
 // bios, avatar variants) live in src/data/site.js → contact.people, so contact
 // details stay in ONE place across the whole site.
 export const founders = {
-  note: `Men in Cam started with two friends who love cameras. Over the years our crew has covered weddings, birthdays, parties and company events — big and small. Our goal is simple: capture your day in a natural, fun way, and make the whole thing easy for you. No stress, no stiff poses — just good photos and video you will be happy to keep.`,
-  signature: '— Shakthi & Arun, founders of Men in Cam',
+  note: `Men in Cam started with two friends who love cameras. Over the years our crew has covered weddings, birthdays, parties and company events, big and small. Our goal is simple: capture your day in a natural, fun way, and make the whole thing easy for you. No stress, no stiff poses. Just good photos and video you will be happy to keep.`,
+  signature: 'Shakthi & Arun, founders of Men in Cam',
 };
 
 // Simple "how we work" points (used on About + Home).

@@ -4,13 +4,13 @@ import Icon from '../ui/Icon';
 import { whatsappLink } from '../../data/site';
 
 /**
- * Bold full-width CTA band — a bright tangerine "tap here" moment that closes
+ * Bold full-width CTA band: a bright tangerine "tap here" moment that closes
  * every page. Reusable: pass custom copy or use the defaults.
  */
 export default function CTABand({
   eyebrow = 'Ready to book?',
   title = 'Tell us about your event.',
-  body = 'Send your date and what you’re planning. We’ll reply within 24 hours with a simple quote — no obligation.',
+  body = 'Send your date and what you’re planning. We’ll reply within 24 hours with a simple quote, no obligation.',
 }) {
   return (
     <section className="relative overflow-hidden bg-gold">
@@ -31,7 +31,7 @@ export default function CTABand({
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{body}</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            {/* Fixed dark text — the ink token flips to cream in Daylight and
+            {/* Fixed dark text: the ink token flips to cream in Daylight and
                 would vanish on this white button. */}
             <Button to="/contact" size="lg" className="!bg-white !text-[#1A1614] hover:!bg-white/90">
               Get a quote <ArrowIcon />

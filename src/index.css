@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ───────────────────────────────────────────────────────────────────────────
-   THEME TOKENS — "Midnight" (Men in Cam)
+   THEME TOKENS: "Midnight" (Men in Cam)
    The whole site reads colour through these CSS variables (mapped in
    tailwind.config.js). Bold & cinematic: a near-black canvas, crisp off-white
    text, one high-energy RED action accent (camera-iconic on black), and a teal
@@ -13,16 +13,16 @@
    Values are space-separated RGB channels so Tailwind's <alpha-value> works.
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
-  --c-ink: 11 11 13; /* #0B0B0D near-black — page background */
+  --c-ink: 11 11 13; /* #0B0B0D near-black, page background */
   --c-surface: 22 21 25; /* #161519 raised cards / fields */
-  --c-ivory: 243 241 236; /* #F3F1EC off-white — primary text */
-  --c-muted: 156 150 140; /* #9C968C grey — secondary text */
-  --c-gold: 224 30 43; /* #E01E2B bold red — action accent (white text clears AA) */
+  --c-ivory: 243 241 236; /* #F3F1EC off-white, primary text */
+  --c-muted: 156 150 140; /* #9C968C grey, secondary text */
+  --c-gold: 224 30 43; /* #E01E2B bold red, action accent (white text clears AA) */
   --c-line: 40 38 44; /* #28262C hairline borders */
-  --c-teal: 45 212 191; /* #2DD4BF teal — trust / WhatsApp cue */
+  --c-teal: 45 212 191; /* #2DD4BF teal, trust / WhatsApp cue */
 }
 
-/* Optional bright variant — add class="theme-light" to <html> for "Daylight".
+/* Optional bright variant: add class="theme-light" to <html> for "Daylight".
    Visitors can switch themes themselves via the Settings panel (bottom-right);
    the choice is saved on the device and applied pre-paint by index.html. */
 .theme-light {
@@ -98,7 +98,7 @@ html[data-accent='rose'] {
     }
   }
 
-  /* "Calm" motion mode chosen in the Settings panel — mirrors the OS rule so
+  /* "Calm" motion mode chosen in the Settings panel: mirrors the OS rule so
      users on any device can opt out of animation. */
   html[data-motion='reduced'] *,
   html[data-motion='reduced'] *::before,
@@ -147,7 +147,7 @@ html[data-accent='rose'] {
     @apply -translate-y-1 border-gold/40 shadow-lift;
   }
 
-  /* Bento panel — the building block of the new layout. */
+  /* Bento panel: the building block of the new layout. */
   .panel {
     @apply rounded-bento border border-line bg-surface shadow-soft;
   }
@@ -232,7 +232,7 @@ html.lenis body {
   animation: mic-flash 0.65s ease-out forwards;
 }
 
-/* Tangerine text selection — a small on-brand detail. */
+/* Tangerine text selection, a small on-brand detail. */
 ::selection {
   background: rgb(var(--c-gold) / 0.85);
   color: #ffffff;

@@ -4,7 +4,7 @@ import { brand } from '../data/site';
 /**
  * Tiny dependency-free SEO helper. Sets per-page <title>, meta description,
  * canonical, and Open Graph tags by mutating the document head. Works fine for
- * a client-rendered SPA (and keeps the bundle lean — no react-helmet).
+ * a client-rendered SPA (and keeps the bundle lean, no react-helmet).
  */
 function setMeta(attr, key, content) {
   if (!content) return;
@@ -19,7 +19,7 @@ function setMeta(attr, key, content) {
 
 export default function Seo({ title, description, image, path = '/', keywords, jsonLd }) {
   useEffect(() => {
-    const fullTitle = title ? `${title} · ${brand.name}` : `${brand.name} — Photo & Video for Every Event`;
+    const fullTitle = title ? `${title} · ${brand.name}` : `${brand.name} · Photo & Video for Every Event`;
     document.title = fullTitle;
 
     setMeta('name', 'description', description);

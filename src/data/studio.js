@@ -1,7 +1,7 @@
 // Studio-level content for the info sections (Why Us, Process, promises).
-// Simple, everyday language. PLACEHOLDER copy — edit to your real offering.
+// Simple, everyday language. PLACEHOLDER copy, edit to your real offering.
 
-// Why people pick us — plain and clear.
+// Why people pick us: plain and clear.
 export const whyUs = [
   {
     icon: 'sparkles',
@@ -26,7 +26,7 @@ export const whyUs = [
   {
     icon: 'plane',
     title: 'We travel',
-    body: 'In your city or out of town, we come to you. Travel is easy to arrange — just tell us where.',
+    body: 'In your city or out of town, we come to you. Travel is easy to arrange. Just tell us where.',
   },
   {
     icon: 'heart',
@@ -35,12 +35,12 @@ export const whyUs = [
   },
 ];
 
-// How it works — 4 simple steps.
+// How it works: 4 simple steps.
 export const process = [
   {
     step: '01',
     title: 'Send your date',
-    body: 'Tell us your event and date. We will quickly check if we are free — no pressure.',
+    body: 'Tell us your event and date. We will quickly check if we are free, no pressure.',
   },
   {
     step: '02',

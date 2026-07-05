@@ -1,5 +1,5 @@
 /**
- * Minimal route-transition fallback. A single gold ring that breathes — no
+ * Minimal route-transition fallback. A single gold ring that breathes, no
  * heavy assets. Fills the whole viewport so the footer starts BELOW the fold
  * while a lazy page chunk loads: when the page mounts, the footer's move
  * happens off-screen and never counts as layout shift (CLS).

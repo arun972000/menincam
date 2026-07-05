@@ -9,21 +9,21 @@ import { track } from '../lib/track';
 
 /**
  * Contact page: enquiry form + the two founders' direct lines. No street
- * address or map by request — we shoot on location, so the phones ARE the
- * studio. Open 8 AM – 8 PM, every day.
+ * address or map by request: we shoot on location, so the phones ARE the
+ * studio. Open 8 AM - 8 PM, every day.
  */
 export default function Contact() {
   return (
     <>
       <Seo
         title="Contact & Get a Quote"
-        description={`Get a quote from ${brand.name} for any event in ${brand.city} and beyond — weddings, birthdays, parties, corporate and more. Call or WhatsApp the founders directly, 8 AM – 8 PM every day.`}
+        description={`Get a quote from ${brand.name} for any event in ${brand.city} and beyond: weddings, birthdays, parties, corporate and more. Call or WhatsApp the founders directly, 8 AM - 8 PM every day.`}
         path="/contact"
       />
       <PageHeader
         eyebrow="Get a quote"
         title="Tell us about your event"
-        intro="Fill in a few details and we’ll get back within 24 hours with a simple price. Prefer to talk? Both founders pick up directly — 8 AM to 8 PM, every day of the week."
+        intro="Fill in a few details and we’ll get back within 24 hours with a simple price. Prefer to talk? Both founders pick up directly, 8 AM to 8 PM, every day of the week."
         image="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=60"
       />
 
@@ -115,7 +115,7 @@ export default function Contact() {
               </div>
 
               <p className="px-1 text-xs leading-relaxed text-muted">
-                We’re an on-location crew — we come to your venue, anywhere. That’s why you’ll find
+                We’re an on-location crew. We come to your venue, anywhere. That’s why you’ll find
                 phones here instead of a street address.
               </p>
             </div>

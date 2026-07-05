@@ -1,4 +1,4 @@
-// Trust strip + "trusted by" names. PLACEHOLDER names — rendered as simple text
+// Trust strip + "trusted by" names. PLACEHOLDER names, rendered as simple text
 // marks (no copyrighted logos shipped). Swap for real mentions when you have them.
 export const press = [
   'WeddingSutra',
@@ -10,12 +10,12 @@ export const press = [
 ];
 
 export const awards = [
-  { year: '2024', title: 'Top-rated event photographers — Chennai' },
+  { year: '2024', title: 'Top-rated event photographers · Chennai' },
   { year: '2023', title: '5-star rated by 500+ clients' },
   { year: '2022', title: 'Best value photo + video team' },
 ];
 
-// "Trusted at" places for social proof — covers all kinds of venues.
+// "Trusted at" places for social proof: covers all kinds of venues.
 export const venues = [
   'Hotels & banquet halls',
   'Convention centres',
@@ -25,7 +25,7 @@ export const venues = [
   'Home functions',
 ];
 
-// Instagram strip — placeholder square thumbnails linking to the profile.
+// Instagram strip: placeholder square thumbnails linking to the profile.
 // This is the bridge to your showcase (your real work lives on Instagram).
 // TODO: replace with your latest posts.
 export const instagramPosts = [
@@ -37,7 +37,7 @@ export const instagramPosts = [
   'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=400&q=60',
 ];
 
-// Event-type options for the enquiry form — covers all events, simple wording.
+// Event-type options for the enquiry form: covers all events, simple wording.
 export const eventTypes = [
   'Wedding',
   'Birthday / Anniversary',
@@ -50,10 +50,10 @@ export const eventTypes = [
 ];
 
 // Optional lead-qualification field. "Prefer not to say" is first/default so it
-// never puts people off — we want the enquiry, not a price negotiation.
+// never puts people off: we want the enquiry, not a price negotiation.
 export const budgetRanges = [
   'Prefer not to say',
-  'Not sure yet — guide me',
+  'Not sure yet, guide me',
   'Small / simple',
   'Medium',
   'Premium / no limit',

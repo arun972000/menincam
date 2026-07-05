@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import BottomSheet from '../ui/BottomSheet';
 import Icon from '../ui/Icon';
 import { contact, social, whatsappLink } from '../../data/site';
+import { usePreferences } from '../../context/PreferencesContext';
 import { openDateChecker, openSettings } from '../../lib/bus';
 import { track } from '../../lib/track';
 import { tap } from '../../lib/haptics';
 
 /**
- * The mobile app chrome — a floating dock (not a full-width web bar) with a
+ * The mobile app chrome: a floating dock (not a full-width web bar) with a
  * raised camera "Book" action in the middle. Replaces the hamburger menu below
  * lg: primary pages are tabs, everything else lives in the "More" sheet.
  * Active tab gets an animated accent pill (shared layoutId).
@@ -112,10 +113,29 @@ function MoreLink({ to, title, sub, onNavigate }) {
 
 export default function MobileTabBar() {
   const [moreOpen, setMoreOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const { pathname } = useLocation();
+  const { calm } = usePreferences();
+  const { scrollY } = useScroll();
 
-  // Close the More sheet after navigating.
-  useEffect(() => setMoreOpen(false), [pathname]);
+  // Smart dock: slides away while reading down, springs back on a flick up
+  // (like native app chrome). 6px deadband stops jitter from momentum scroll;
+  // pinned visible near the top of every page. Calm users keep it always on.
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    const d = y - prev;
+    if (y < 120 || d < -6) setHidden(false);
+    else if (d > 6) setHidden(true);
+  });
+
+  // Close the More sheet + re-show the dock after navigating.
+  useEffect(() => {
+    setMoreOpen(false);
+    setHidden(false);
+  }, [pathname]);
+  useEffect(() => {
+    if (moreOpen) setHidden(false);
+  }, [moreOpen]);
 
   const moreActive = ['/about', '/faq', '/contact'].includes(pathname);
 
@@ -126,12 +146,16 @@ export default function MobileTabBar() {
         className="fixed inset-x-3 z-40 lg:hidden"
         style={{ bottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
       >
-        <div className="mx-auto flex max-w-md items-stretch rounded-2xl border border-line bg-surface/90 shadow-lift backdrop-blur-xl">
+        <motion.div
+          animate={{ y: hidden && !calm ? 110 : 0 }}
+          transition={{ type: 'spring', stiffness: 380, damping: 34 }}
+          className="mx-auto flex max-w-md items-stretch rounded-2xl border border-line bg-surface/90 shadow-lift backdrop-blur-xl"
+        >
           {TABS_LEFT.map((t) => (
             <Tab key={t.to} {...t} />
           ))}
 
-          {/* Raised "Book" action — the heart of the mobile experience. */}
+          {/* Raised "Book" action, the heart of the mobile experience. */}
           <div className="relative flex flex-1 items-end justify-center pb-1.5">
             <button
               type="button"
@@ -139,7 +163,7 @@ export default function MobileTabBar() {
                 tap(12);
                 openDateChecker('tabbar');
               }}
-              aria-label="Book — check your date"
+              aria-label="Book: check your date"
               className="absolute -top-6 grid h-14 w-14 place-items-center rounded-full bg-gold text-white shadow-glow transition-transform duration-200 ease-snap active:scale-90"
             >
               <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-gold/30 [animation-duration:2.4s]" />
@@ -178,7 +202,7 @@ export default function MobileTabBar() {
               More
             </span>
           </button>
-        </div>
+        </motion.div>
       </nav>
 
       {/* ── "More" hub sheet ── */}

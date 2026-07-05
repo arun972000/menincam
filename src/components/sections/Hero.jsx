@@ -1,12 +1,21 @@
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 import Magnetic from '../ui/Magnetic';
 import Button, { ArrowIcon } from '../ui/Button';
 import Icon from '../ui/Icon';
 import { brand, social, whatsappLink } from '../../data/site';
-import { usePrefersReducedMotion } from '../../hooks/useMediaQuery';
+import { useIsMobile } from '../../hooks/useMediaQuery';
+import { usePreferences } from '../../context/PreferencesContext';
 
-// Full-bleed background frames — high-res event photos. The first is the LCP
+// Full-bleed background frames: high-res event photos. The first is the LCP
 // image; the rest mount after idle and slow-crossfade with a Ken Burns zoom.
 // TODO: replace with your best real shots (or drop a <video> reel in below).
 const FRAMES = [
@@ -29,10 +38,53 @@ function srcset(base) {
 }
 
 export default function Hero() {
-  const reduced = usePrefersReducedMotion();
+  // Calm already ORs the OS reduced-motion setting, so it is a strict
+  // superset of the old prefers-reduced-motion check.
+  const { calm, spotlight } = usePreferences();
+  const reduced = calm;
+  const isMobile = useIsMobile();
+  // Lens parallax mounts on desktop only; mobile and Calm get today's static hero.
+  const interactive = !calm && !isMobile;
+
   const [frame, setFrame] = useState(0);
   const [word, setWord] = useState(0);
   const [extrasReady, setExtrasReady] = useState(false);
+
+  // ── "Through the lens" depth: photo drifts against the cursor, copy drifts
+  //    with it, and an accent glare tracks the pointer like light on glass.
+  //    All hooks run unconditionally; only the style props attach conditionally.
+  const sectionRef = useRef(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const smx = useSpring(mx, { stiffness: 120, damping: 20 });
+  const smy = useSpring(my, { stiffness: 120, damping: 20 });
+  const gxRaw = useMotionValue(-500);
+  const gyRaw = useMotionValue(-500);
+  const gx = useSpring(gxRaw, { stiffness: 160, damping: 24 });
+  const gy = useSpring(gyRaw, { stiffness: 160, damping: 24 });
+
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
+  const bgX = useTransform(smx, (v) => v * -14);
+  const bgY = useTransform(smy, (v) => v * -10);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.06, 1.14]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+  const driftX = useTransform(smx, (v) => v * 6);
+  const driftY = useTransform(smy, (v) => v * 4);
+  const glare = useMotionTemplate`radial-gradient(30rem circle at ${gx}px ${gy}px, rgb(var(--c-gold) / 0.10), transparent 60%)`;
+
+  const onPointerMove = (e) => {
+    const r = sectionRef.current?.getBoundingClientRect();
+    if (!r) return;
+    mx.set(e.clientX / r.width - 0.5);
+    my.set(e.clientY / r.height - 0.5);
+    gxRaw.set(e.clientX - r.left);
+    gyRaw.set(e.clientY - r.top);
+  };
+  const onPointerLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
 
   // Mount frames 2-n after idle so they never compete with the LCP frame.
   useEffect(() => {
@@ -55,9 +107,17 @@ export default function Hero() {
   }, [reduced]);
 
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink">
-      {/* ── Full-bleed crossfading background ── */}
-      <div className="absolute inset-0">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink"
+      {...(interactive ? { onPointerMove, onPointerLeave } : {})}
+    >
+      {/* ── Full-bleed crossfading background (drifts against the cursor;
+             the permanent 1.06 scale hides the travel so edges never show) ── */}
+      <motion.div
+        className="absolute inset-0 scale-[1.06]"
+        style={interactive ? { x: bgX, y: bgY, scale: bgScale } : undefined}
+      >
         {FRAMES.map((f, i) => {
           if (i > 0 && !extrasReady) return null;
           const active = i === frame;
@@ -79,17 +139,32 @@ export default function Hero() {
             />
           );
         })}
-        {/* Cinematic legibility scrims — TRUE black (not the ink token) so the
+        {/* Cinematic legibility scrims: TRUE black (not the ink token) so the
             fixed-white hero text stays readable in Daylight theme too. */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/70" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
         {/* Theme-aware fade so the hero's bottom edge blends into the page. */}
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink to-transparent" />
-      </div>
+        {/* Lens glare tracking the pointer (respects the spotlight preference) */}
+        {interactive && spotlight && (
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{ background: glare }}
+          />
+        )}
+      </motion.div>
 
-      {/* ── Content ── */}
-      <div className="container-x relative z-10 pt-24">
-        <div className="max-w-3xl">
+      {/* ── Content (slides up + fades as you scroll away, drifts subtly with
+             the cursor for depth against the background) ── */}
+      <motion.div
+        className="container-x relative z-10 pt-24"
+        style={interactive ? { y: contentY, opacity: contentOpacity } : undefined}
+      >
+        <motion.div
+          className="max-w-3xl"
+          style={interactive ? { x: driftX, y: driftY } : undefined}
+        >
           <motion.span
             className="chip !border-gold/40 !bg-black/30 !text-white backdrop-blur-sm"
             initial={{ opacity: 0, y: 10 }}
@@ -109,7 +184,13 @@ export default function Hero() {
             <br />
             <span className="inline-flex flex-wrap items-baseline gap-x-4">
               <span>for</span>
-              <span className="text-gold">
+              {/* inline-grid stacks every word in one cell; an invisible ghost
+                  sizes the box to the WIDEST word so swapping words never
+                  reflows the line (was a periodic layout shift / CLS). */}
+              <span className="relative inline-grid text-gold">
+                <span className="invisible col-start-1 row-start-1 whitespace-nowrap" aria-hidden="true">
+                  {WORDS.reduce((a, b) => (b.length > a.length ? b : a))}
+                </span>
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={WORDS[word]}
@@ -117,7 +198,7 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -16 }}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                    className="inline-block"
+                    className="col-start-1 row-start-1 inline-block whitespace-nowrap"
                   >
                     {WORDS[word]}
                   </motion.span>
@@ -134,7 +215,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.45 }}
           >
             {brand.name} is a friendly crew covering all kinds of events. Easy booking, natural
-            photos and quick delivery — just tell us your date.
+            photos and quick delivery. Just tell us your date.
           </motion.p>
 
           <motion.div
@@ -185,8 +266,8 @@ export default function Hero() {
               </li>
             ))}
           </motion.ul>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Frame ticks + scroll cue */}
       {extrasReady && !reduced && (
@@ -197,7 +278,7 @@ export default function Hero() {
               type="button"
               aria-label={`Show slide ${i + 1}`}
               onClick={() => setFrame(i)}
-              className="group/tick flex h-6 items-center"
+              className="group/tick flex h-6 min-w-6 items-center justify-center"
             >
               <span
                 className={`h-1.5 rounded-full transition-all duration-500 ${

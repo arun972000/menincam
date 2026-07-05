@@ -4,12 +4,12 @@ import { usePreferences } from '../../context/PreferencesContext';
 import { tap } from '../../lib/haptics';
 
 /**
- * Interactive animated character avatar for the founders — a friendly cartoon
+ * Interactive animated character avatar for the founders: a friendly cartoon
  * photographer instead of a stock photo. The character's eyes FOLLOW the
  * visitor's cursor, it blinks on its own, and hovering/tapping makes it grin
- * and fire its camera flash (with a haptic tick on phones). Pure inline SVG —
+ * and fire its camera flash (with a haptic tick on phones). Pure inline SVG,
  * zero image requests. Two variants:
- *   'a' — cap + beard (Shakthi)   'b' — glasses + curly hair (Arun)
+ *   'a' - cap + beard (Shakthi)   'b' - glasses + curly hair (Arun)
  * All motion stops in Calm/reduced-motion mode (friendly static portrait).
  */
 
@@ -89,7 +89,7 @@ export default function AvatarCharacter({ variant = 'a', name = '', size = 160, 
       className={`inline-block cursor-pointer select-none ${className}`}
       style={{ width: size, height: size }}
       role="img"
-      aria-label={`${name} — animated character portrait`}
+      aria-label={`${name}, animated character portrait`}
     >
       <svg viewBox="0 0 120 120" className="h-full w-full" aria-hidden="true">
         {/* Frame */}
@@ -150,7 +150,7 @@ export default function AvatarCharacter({ variant = 'a', name = '', size = 160, 
           </>
         )}
 
-        {/* Mouth — grins when greeted */}
+        {/* Mouth: grins when greeted */}
         {happy ? (
           <path d="M52 63q8 8 16 0q-2 7-8 7t-8-7Z" fill="#7C2D2D" stroke="#1E1B18" strokeWidth="1.4" strokeLinejoin="round" />
         ) : (

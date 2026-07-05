@@ -56,7 +56,7 @@ export default function FAQ() {
     <>
       <Seo
         title="FAQ"
-        description="Common questions about Men in Cam — what events we cover, travel, delivery times, booking and pricing. Quick, simple answers."
+        description="Common questions about Men in Cam: what events we cover, travel, delivery times, booking and pricing. Quick, simple answers."
         path="/faq"
       />
       <PageHeader
@@ -82,7 +82,7 @@ export default function FAQ() {
 
       <CTABand
         eyebrow="Still curious?"
-        title="Ask us anything — really."
+        title="Ask us anything. Really."
         body="No question is too small. Tell us what’s on your mind and we’ll help you plan."
       />
     </>

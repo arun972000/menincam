@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { usePrefersReducedMotion } from '../hooks/useMediaQuery';
 
 /**
- * Route page-transition wipe — a tangerine panel sweeps up across the screen on
+ * Route page-transition wipe: a tangerine panel sweeps up across the screen on
  * each navigation (the "moving between scenes" beat). The new page mounts
  * underneath while it's covered. Pure transform, pointer-events-none, ~no cost.
  * Skipped on first load and for reduced-motion.

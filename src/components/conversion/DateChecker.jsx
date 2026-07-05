@@ -11,7 +11,7 @@ import { tap } from '../../lib/haptics';
 import { confettiBurst } from '../../lib/confetti';
 
 /**
- * "Check your date" — a 3-step availability/booking flow no local competitor
+ * "Check your date": a 3-step availability/booking flow no local competitor
  * offers: occasion → date → instant answer + WhatsApp handoff with everything
  * pre-filled. Bottom sheet on mobile, centered dialog on desktop. Mounted once
  * in Layout; open it from anywhere via openDateChecker(source).
@@ -130,7 +130,7 @@ export default function DateChecker() {
           {step === 0 && (
             <motion.div key="s0" {...slide}>
               <h2 className="mt-5 font-serif text-2xl text-ivory">What are we shooting?</h2>
-              <p className="mt-1 text-sm text-muted">Pick the occasion — takes 10 seconds.</p>
+              <p className="mt-1 text-sm text-muted">Pick the occasion. It takes 10 seconds.</p>
               <div className="mt-5 grid grid-cols-2 gap-2.5">
                 {eventTypes.map((t) => (
                   <button
@@ -172,7 +172,7 @@ export default function DateChecker() {
                   onClick={() => confirmDate(true)}
                   className="py-2 text-sm font-medium text-muted transition-colors hover:text-gold"
                 >
-                  Date not fixed yet — that’s fine →
+                  Date not fixed yet? That’s fine →
                 </button>
               </div>
             </motion.div>
@@ -188,12 +188,12 @@ export default function DateChecker() {
               >
                 <Icon name="check" className="h-8 w-8" />
               </motion.span>
-              <h2 className="mt-4 font-serif text-2xl text-ivory">Great news — we’re taking bookings.</h2>
+              <h2 className="mt-4 font-serif text-2xl text-ivory">Great news, we’re taking bookings.</h2>
               <p className="mx-auto mt-2 max-w-xs text-sm text-muted">
                 {eventType} · {dateLabel}. Say hi and we’ll confirm your slot.
               </p>
               <span className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-teal/40 bg-teal/10 px-3.5 py-1.5 text-xs font-semibold text-teal">
-                ⚡ We reply within 2 hours, 8 AM – 8 PM
+                ⚡ We reply within 2 hours, 8 AM - 8 PM
               </span>
               <div className="mt-5 flex flex-col gap-2.5">
                 <Button

@@ -5,7 +5,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { usePreferences } from '../context/PreferencesContext';
 
 /**
- * Smooth momentum scrolling (Lenis) — the single biggest "immersive feel"
+ * Smooth momentum scrolling (Lenis): the single biggest "immersive feel"
  * upgrade, for ~3 KB. It drives the real page scroll with inertia, so existing
  * scroll listeners (navbar, sticky CTA) and Framer's useScroll keep working.
  *

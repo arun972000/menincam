@@ -20,12 +20,12 @@ export function useMediaQuery(query) {
   return matches;
 }
 
-/** True on phones / small tablets — used to disable 3D entirely on mobile. */
+/** True on phones / small tablets: used to disable 3D entirely on mobile. */
 export function useIsMobile() {
   return useMediaQuery('(max-width: 767px)');
 }
 
-/** True below the desktop breakpoint — the app-style mobile chrome (bottom
+/** True below the desktop breakpoint: the app-style mobile chrome (bottom
  *  tab bar, bottom sheets) shows in this range; desktop keeps the web UI. */
 export function useIsCompact() {
   return useMediaQuery('(max-width: 1023px)');

@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Men in Cam — central site configuration.
+// Men in Cam: central site configuration.
 // EDIT THIS FILE to update brand details, contact info, and navigation.
-// Everything below is PLACEHOLDER content — replace with real Men in Cam data.
+// Everything below is PLACEHOLDER content, replace with real Men in Cam data.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const brand = {
@@ -9,10 +9,10 @@ export const brand = {
   // Primary tagline + 2 alternatives (swap `tagline` to switch).
   tagline: 'The squad that shows up and nails the shot.',
   taglineAlternatives: [
-    'Big day or small party — we bring the cameras.',
+    'Big day or small party, we bring the cameras.',
     'Tap. Book. We handle the rest.',
   ],
-  // [CITY / BASE] — your main city for SEO and the "based in" line.
+  // [CITY / BASE]: your main city for SEO and the "based in" line.
   city: 'Chennai',
   region: 'Tamil Nadu',
   country: 'India',
@@ -21,14 +21,14 @@ export const brand = {
 };
 
 export const contact = {
-  // The two founders — both personally handle every business enquiry.
+  // The two founders: both personally handle every business enquiry.
   // `avatar` picks the animated character variant (see ui/AvatarCharacter).
   people: [
     {
       id: 'shakthi',
       name: 'Shakthi Kumar S',
       role: 'Co-Founder & CEO',
-      bio: 'Shakthi looks after bookings, budgets and the big picture — call him and your date is as good as planned.',
+      bio: 'Shakthi looks after bookings, budgets and the big picture. Call him and your date is as good as planned.',
       phoneDisplay: '+91 70105 33561',
       phoneE164: '+917010533561',
       whatsapp: '917010533561',
@@ -38,14 +38,14 @@ export const contact = {
       id: 'arun',
       name: 'Arun Pandian M',
       role: 'Co-Founder & CEO',
-      bio: 'Arun handles enquiries, crews and delivery — message him anytime and he’ll sort your event end to end.',
+      bio: 'Arun handles enquiries, crews and delivery. Message him anytime and he’ll sort your event end to end.',
       phoneDisplay: '+91 74492 05596',
       phoneE164: '+917449205596',
       whatsapp: '917449205596',
       avatar: 'b',
     },
   ],
-  // Primary line (first founder) — used wherever only one number fits.
+  // Primary line (first founder), used wherever only one number fits.
   phoneDisplay: '+91 70105 33561',
   phoneE164: '+917010533561',
   // WhatsApp number in international format WITHOUT the leading "+" or spaces.
@@ -53,8 +53,8 @@ export const contact = {
   whatsappPrefill:
     'Hi Men in Cam! I want to book photos/video for my event. Can you check if you are free?',
   email: 'studio@menincam.in',
-  // No street address or map by request — we come to you, city base only.
-  hours: 'Mon–Sun · 8 AM – 8 PM',
+  // No street address or map by request: we come to you, city base only.
+  hours: 'Mon-Sun · 8 AM - 8 PM',
 };
 
 export const social = {
@@ -66,7 +66,7 @@ export const social = {
   pinterest: 'https://pinterest.com/',
 };
 
-// Primary navigation — order matters; rendered in the navbar + footer.
+// Primary navigation: order matters; rendered in the navbar + footer.
 // NOTE: Portfolio / Films / Reviews / Journal live on Instagram for now. The
 // website is focused on enquiries; those pages can be added back in a later phase.
 export const nav = [

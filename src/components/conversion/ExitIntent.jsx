@@ -102,7 +102,7 @@ export default function ExitIntent() {
               <div className="absolute inset-x-0 bottom-0 p-7">
                 <Icon name="quote" className="h-7 w-7 text-gold" />
                 <p className="mt-2 font-display text-lg font-semibold leading-snug text-white">
-                  “They captured our day perfectly — so many little moments we would have missed.”
+                  “They captured our day perfectly. So many little moments we would have missed.”
                 </p>
                 <p className="mt-2 text-xs uppercase tracking-widest2 text-gold">A happy client</p>
               </div>
@@ -128,7 +128,7 @@ export default function ExitIntent() {
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-muted">
                 Tell us your date and we’ll send a simple price within 24 hours.
-                No obligation — just a quick, friendly reply.
+                No obligation, just a quick, friendly reply.
               </p>
 
               {/* Social proof */}
@@ -150,7 +150,7 @@ export default function ExitIntent() {
 
               <p className="mt-4 flex items-center gap-2 text-xs text-muted">
                 <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-                Popular dates fill up fast — send yours today.
+                Popular dates fill up fast, so send yours today.
               </p>
             </div>
           </motion.div>

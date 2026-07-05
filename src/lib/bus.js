@@ -1,5 +1,5 @@
 /**
- * Minimal app event bus — lets any component open globally-mounted overlays
+ * Minimal app event bus: lets any component open globally-mounted overlays
  * (the "Check your date" sheet, the Settings panel) without prop-drilling or
  * context rewiring. Components mount once in Layout and subscribe here.
  */

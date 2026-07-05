@@ -4,7 +4,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { usePreferences } from '../context/PreferencesContext';
 
 /**
- * Soft accent "spotlight" that trails the cursor — ambient atmosphere for the
+ * Soft accent "spotlight" that trails the cursor: ambient atmosphere for the
  * immersive feel. Pure transform on a single blurred blob, pointer-events-none.
  * Desktop only; never renders on touch / reduced motion, and visitors can turn
  * it off in the Settings panel.

@@ -6,7 +6,7 @@ import { promises } from '../../data/studio';
  * that scrolls the studio's promises. Duplicated once for a seamless loop. The
  * animation respects reduced-motion via the global rule in index.css, and
  * PAUSES while off-screen (IntersectionObserver) so it never costs frames the
- * visitor can't see — matters on cheaper phones.
+ * visitor can't see, which matters on cheaper phones.
  */
 export default function Marquee() {
   const items = [...promises, ...promises];

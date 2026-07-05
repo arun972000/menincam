@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { brand } from '../../data/site';
 
 /**
- * Men in Cam wordmark — a bold all-caps lockup with a camera-lens mark whose
+ * Men in Cam wordmark: a bold all-caps lockup with a camera-lens mark whose
  * iris glows in the tangerine accent. Pure SVG/CSS, no image request. Colours
  * read from theme tokens so it adapts to the optional dark variant too.
  */
@@ -14,7 +14,7 @@ export default function Logo({ className = '', onDark = false }) {
     <Link
       to="/"
       className={`group flex items-center gap-2.5 ${className}`}
-      aria-label={`${brand.name} — Photo & Video — home`}
+      aria-label={`${brand.name} · Photo & Video · home`}
     >
       {/* Camera-lens mark */}
       <span className="relative grid h-9 w-9 place-items-center transition-transform duration-300 ease-cinema group-hover:rotate-12">

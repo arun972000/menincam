@@ -1,4 +1,4 @@
-// Simple trust numbers. PLACEHOLDER figures — update with your real numbers.
+// Simple trust numbers. PLACEHOLDER figures, update with your real numbers.
 export const stats = [
   { value: 1200, suffix: '+', label: 'Events covered' },
   { value: 12, suffix: '+', label: 'Years of experience' },

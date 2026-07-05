@@ -3,7 +3,7 @@ import LazyImage from '../ui/LazyImage';
 import Reveal, { RevealGroup, RevealItem } from '../ui/Reveal';
 import { approach } from '../../data/team';
 
-/** "Our approach" — natural, unobtrusive coverage. */
+/** "Our approach": natural, unobtrusive coverage. */
 export default function Approach() {
   return (
     <Section>

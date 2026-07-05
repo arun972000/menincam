@@ -4,8 +4,8 @@ import { press, awards, venues } from '../../data/press';
 
 /**
  * Press / awards section. Simple text marks for review sites (no copyrighted
- * logo files shipped), award cards, and a "we cover events at" strip — friendly
- * social proof.
+ * logo files shipped), award cards, and a "we cover events at" strip, for
+ * friendly social proof.
  */
 export default function PressWall() {
   return (

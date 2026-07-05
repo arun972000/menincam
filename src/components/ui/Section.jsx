@@ -1,4 +1,5 @@
 import Reveal from './Reveal';
+import FocusText from './FocusText';
 
 /** Generic vertical-rhythm section wrapper. */
 export default function Section({ id, className = '', children, container = true }) {
@@ -20,7 +21,7 @@ export function SectionHeading({ eyebrow, title, intro, align = 'left', classNam
         </span>
       )}
       <h2 className="font-display text-fluid-xl font-extrabold leading-[1.05] tracking-tight text-ivory text-balance">
-        {title}
+        {typeof title === 'string' ? <FocusText>{title}</FocusText> : title}
       </h2>
       {intro && <p className="text-base leading-relaxed text-muted sm:text-lg">{intro}</p>}
     </Reveal>

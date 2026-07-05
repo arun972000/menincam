@@ -3,7 +3,7 @@ import Icon from '../ui/Icon';
 import { track } from '../../lib/track';
 
 /**
- * Floating WhatsApp button — desktop only (essential for the Indian market).
+ * Floating WhatsApp button, desktop only (essential for the Indian market).
  * On mobile the app chrome covers this: WhatsApp lives in the top bar, the
  * Book flow and the More sheet. Opens a pre-filled chat.
  */

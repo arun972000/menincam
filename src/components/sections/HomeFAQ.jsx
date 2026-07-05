@@ -5,7 +5,7 @@ import Button, { ArrowIcon } from '../ui/Button';
 import Reveal from '../ui/Reveal';
 import { faqs } from '../../data/faqs';
 
-/** Home FAQ teaser — the top questions, answered inline to lower friction. */
+/** Home FAQ teaser: the top questions, answered inline to lower friction. */
 export default function HomeFAQ() {
   const [open, setOpen] = useState(0);
   const items = faqs.slice(0, 5);
@@ -17,7 +17,7 @@ export default function HomeFAQ() {
           <SectionHeading
             eyebrow="Good to know"
             title="Quick answers, no surprises"
-            intro="The things people ask us most — answered up front. Still curious? We’re a message away."
+            intro="The things people ask us most, answered up front. Still curious? We’re a message away."
           />
           <Reveal className="mt-7 flex flex-wrap gap-3">
             <Button to="/faq" variant="outline">

@@ -30,7 +30,7 @@ export default function Reveal({
   );
 }
 
-/** Staggered container — pair with <RevealItem> for lists/grids. */
+/** Staggered container: pair with <RevealItem> for lists/grids. */
 export function RevealGroup({ children, className = '', stagger = 0.08, amount = 0.2 }) {
   return (
     <motion.div

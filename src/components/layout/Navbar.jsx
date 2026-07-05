@@ -8,7 +8,7 @@ import { track } from '../../lib/track';
 
 /**
  * Sticky top bar: transparent over the hero, frosted/solid once scrolled.
- * Desktop shows inline links + CTA. On mobile there is NO hamburger — primary
+ * Desktop shows inline links + CTA. On mobile there is NO hamburger: primary
  * navigation lives in the bottom tab bar (app chrome), so the top bar stays
  * minimal: logo + a WhatsApp quick action.
  */
@@ -73,7 +73,7 @@ export default function Navbar() {
           </Button>
         </div>
 
-        {/* Mobile quick action — navigation lives in the bottom tab bar. */}
+        {/* Mobile quick action: navigation lives in the bottom tab bar. */}
         <a
           href={whatsappLink()}
           target="_blank"

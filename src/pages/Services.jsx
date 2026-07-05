@@ -66,7 +66,7 @@ export default function Services() {
       <PageHeader
         eyebrow="What we cover"
         title="Photos & video for any event"
-        intro="Big or small, formal or fun — here’s everything we cover. Not sure which fits? Just message us and we’ll help."
+        intro="Big or small, formal or fun, here’s everything we cover. Not sure which fits? Just message us and we’ll help."
         image="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=60"
       />
 

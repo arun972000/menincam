@@ -58,7 +58,7 @@ export function PreferencesProvider({ children }) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
     } catch {
-      /* private mode — preferences just won't persist */
+      /* private mode: preferences just won't persist */
     }
     const root = document.documentElement;
     root.classList.toggle('theme-light', isLight);

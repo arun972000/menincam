@@ -1,20 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
-import emailjs from '@emailjs/browser';
 import Button, { ArrowIcon } from '../ui/Button';
 import Icon from '../ui/Icon';
-import { contact, emailjs as emailjsCfg } from '../../data/site';
+import { contact } from '../../data/site';
 import { eventTypes, budgetRanges } from '../../data/press';
+import { sendEnquiry } from '../../lib/mail';
 import { confettiBurst } from '../../lib/confetti';
 import { track } from '../../lib/track';
 
 /**
- * Low-friction inquiry form. Submits to EmailJS when keys are configured;
- * otherwise (and always, as an alternative) offers a WhatsApp deep-link with the
- * details pre-filled. No backend required.
- *
- * ── WHERE TO ADD YOUR KEYS ──────────────────────────────────────────────────
- * Set VITE_EMAILJS_SERVICE_ID / VITE_EMAILJS_TEMPLATE_ID / VITE_EMAILJS_PUBLIC_KEY
- * in a .env file (see .env.example). They flow in via src/data/site.js.
+ * Low-friction inquiry form. Submitting ALWAYS emails the studio inbox
+ * directly (EmailJS when keys are configured, FormSubmit.co otherwise; see
+ * src/lib/mail.js). Nothing redirects the visitor anywhere. WhatsApp is a
+ * separate, clearly-labelled button for people who prefer to chat.
  */
 
 const EMPTY = {
@@ -28,19 +25,13 @@ const EMPTY = {
   message: '',
 };
 
-// True only when real keys have been provided (not the obvious placeholders).
-const keysConfigured =
-  !emailjsCfg.serviceId.includes('PLACEHOLDER') &&
-  !emailjsCfg.templateId.includes('PLACEHOLDER') &&
-  !emailjsCfg.publicKey.includes('PLACEHOLDER');
-
 export default function InquiryForm() {
   const [form, setForm] = useState(EMPTY);
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
   const update = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  // A booked enquiry is worth celebrating — confetti on success (no-ops for
+  // A booked enquiry is worth celebrating: confetti on success (no-ops for
   // reduced-motion / Calm-mode users).
   useEffect(() => {
     if (status === 'success') confettiBurst();
@@ -63,18 +54,10 @@ export default function InquiryForm() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!keysConfigured) {
-      // No EmailJS keys yet → route the lead straight to WhatsApp.
-      window.open(whatsappHref, '_blank', 'noopener');
-      setStatus('success');
-      track('enquiry_submitted', { method: 'whatsapp' });
-      return;
-    }
+    if (status === 'sending') return;
     try {
       setStatus('sending');
-      await emailjs.send(
-        emailjsCfg.serviceId,
-        emailjsCfg.templateId,
+      const result = await sendEnquiry(
         {
           from_name: form.name,
           phone: form.phone,
@@ -85,13 +68,13 @@ export default function InquiryForm() {
           budget: form.budget,
           message: form.message,
         },
-        { publicKey: emailjsCfg.publicKey }
+        { subject: `New enquiry from ${form.name} (${form.eventType})` }
       );
       setStatus('success');
       setForm(EMPTY);
-      track('enquiry_submitted', { method: 'emailjs' });
+      track('enquiry_submitted', { method: result.via });
     } catch (err) {
-      console.error('EmailJS error:', err);
+      console.error('Enquiry send failed:', err);
       setStatus('error');
       track('enquiry_error');
     }
@@ -103,13 +86,17 @@ export default function InquiryForm() {
         <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-gold/15 text-gold">
           <Icon name="check" className="h-7 w-7" />
         </span>
-        <h3 className="mt-5 font-serif text-2xl text-ivory">Thank you — we’ve got your details.</h3>
+        <h3 className="mt-5 font-serif text-2xl text-ivory">Thank you. We have your details.</h3>
         <p className="mx-auto mt-2 max-w-md text-sm text-muted">
-          Our team will reach out within 24 hours to check availability for your date. For anything urgent,
-          message us on WhatsApp.
+          Your enquiry is in our inbox at {contact.email}. One of us will reach out within 24
+          hours to check availability for your date. For anything urgent, message us on WhatsApp.
         </p>
         <div className="mt-6 flex justify-center">
-          <Button href={whatsappHref} variant="outline">
+          <Button
+            href={whatsappHref}
+            variant="outline"
+            onClick={() => track('whatsapp_click', { source: 'inquiry_success' })}
+          >
             <Icon name="whatsapp" filled className="h-5 w-5" /> Continue on WhatsApp
           </Button>
         </div>
@@ -123,14 +110,6 @@ export default function InquiryForm() {
 
   return (
     <form onSubmit={onSubmit} className="rounded-2xl border border-line/60 bg-surface/40 p-6 sm:p-8">
-      {!keysConfigured && (
-        <p className="mb-6 rounded-lg border border-gold/30 bg-gold/5 px-4 py-3 text-xs text-muted">
-          {/* Dev note — remove once EmailJS keys are added. */}
-          ⚙️ <span className="text-gold">Setup note:</span> EmailJS keys aren’t configured yet, so this form
-          opens a pre-filled WhatsApp chat instead. Add your keys in <code>.env</code> to receive emails.
-        </p>
-      )}
-
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={label}>Your name *</label>
@@ -175,8 +154,8 @@ export default function InquiryForm() {
       </div>
 
       {status === 'error' && (
-        <p className="mt-4 text-sm font-medium text-red-600">
-          Something went wrong sending your enquiry. Please try WhatsApp below or email us directly.
+        <p className="mt-4 text-sm font-medium text-gold">
+          Something went wrong sending your enquiry. Please try again, or message us on WhatsApp below.
         </p>
       )}
 
@@ -184,12 +163,19 @@ export default function InquiryForm() {
         <Button type="submit" size="lg" className="sm:flex-1" disabled={status === 'sending'}>
           {status === 'sending' ? 'Sending…' : 'Send enquiry'} <ArrowIcon />
         </Button>
-        <Button href={whatsappHref} variant="outline" size="lg" className="sm:flex-1">
-          <Icon name="whatsapp" filled className="h-5 w-5" /> Send via WhatsApp
+        <Button
+          href={whatsappHref}
+          variant="outline"
+          size="lg"
+          className="sm:flex-1"
+          onClick={() => track('whatsapp_click', { source: 'inquiry_form' })}
+        >
+          <Icon name="whatsapp" filled className="h-5 w-5" /> Prefer WhatsApp? Chat now
         </Button>
       </div>
       <p className="mt-4 text-center text-xs text-muted">
-        We typically reply within 24 hours. Your details are only used to respond to your enquiry.
+        Your enquiry goes straight to {contact.email}. We typically reply within 24 hours, and your
+        details are only used to respond to you.
       </p>
     </form>
   );

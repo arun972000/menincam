@@ -1,8 +1,8 @@
-// Simple, plain-English FAQ. PLACEHOLDER answers — adjust to your real policies.
+// Simple, plain-English FAQ. PLACEHOLDER answers, adjust to your real policies.
 export const faqs = [
   {
     q: 'What kind of events do you cover?',
-    a: 'All of them — weddings, birthdays, parties, engagements, baby showers, corporate events, stage shows and more. If you are celebrating something, we can cover it.',
+    a: 'All of them: weddings, birthdays, parties, engagements, baby showers, corporate events, stage shows and more. If you are celebrating something, we can cover it.',
   },
   {
     q: 'Do you travel to other cities?',
@@ -22,7 +22,7 @@ export const faqs = [
   },
   {
     q: 'How much does it cost?',
-    a: 'It depends on your event, date and what you need. Tell us a little about it and we will send a clear price within 24 hours — no hidden charges.',
+    a: 'It depends on your event, date and what you need. Tell us a little about it and we will send a clear price within 24 hours, with no hidden charges.',
   },
   {
     q: 'What if my photographer is unwell on the day?',

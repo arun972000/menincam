@@ -30,7 +30,7 @@ const HOME_JSONLD = [
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: `${brand.name} — event photography & videography services`,
+    name: `${brand.name}: event photography & videography services`,
     itemListElement: servicesOverview.map((s, i) => ({
       '@type': 'ListItem',
       position: i + 1,
@@ -50,7 +50,7 @@ export default function Home() {
     <>
       <Seo
         title="Photo & Video for Every Event"
-        description={`${brand.name} — event photographers & videographers in ${brand.city}. Weddings, birthday parties, engagements, baby showers, corporate events, concerts & drone coverage across Tamil Nadu. Send your date for a quick quote — open 8 AM–8 PM, every day.`}
+        description={`${brand.name}: event photographers & videographers in ${brand.city}. Weddings, birthday parties, engagements, baby showers, corporate events, concerts & drone coverage across Tamil Nadu. Send your date for a quick quote. Open 8 AM-8 PM, every day.`}
         keywords={`event photographers ${brand.city}, wedding photography ${brand.city}, birthday party photographer, candid wedding photographer, corporate event videography, baby shower photoshoot, concert coverage, drone photography, ${brand.name}`}
         path="/"
         jsonLd={HOME_JSONLD}

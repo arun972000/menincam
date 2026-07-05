@@ -17,13 +17,13 @@ export default function About() {
     <>
       <Seo
         title="About Us"
-        description={`Meet ${brand.name} — a friendly photo and video team in ${brand.city} covering all kinds of events. Natural photos, easy booking, quick delivery.`}
+        description={`Meet ${brand.name}, a friendly photo and video team in ${brand.city} covering all kinds of events. Natural photos, easy booking, quick delivery.`}
         path="/about"
       />
       <PageHeader
         eyebrow="About us"
         title="A friendly photo & video team"
-        intro={`${brand.name} is a small, friendly team that covers all kinds of events. Our goal is simple — great photos and video, and an easy, stress-free experience for you.`}
+        intro={`${brand.name} is a small, friendly team that covers all kinds of events. Our goal is simple: great photos and video, and an easy, stress-free experience for you.`}
         image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=60"
       />
 
@@ -31,7 +31,7 @@ export default function About() {
       <Section>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            {/* The two of us — same animated characters as the leadership
+            {/* The two of us: same animated characters as the leadership
                 cards below, no stock-photo strangers. */}
             <div className="panel relative overflow-hidden p-8 text-center sm:p-10">
               <div className="flex items-end justify-center">
@@ -43,7 +43,7 @@ export default function About() {
                 <span className="chip">🎬 Arun</span>
               </div>
               <p className="mt-4 text-xs text-muted">
-                Say hi — we blink, we grin, we even fire the flash.
+                Say hi. We blink, we grin, we even fire the flash.
               </p>
             </div>
           </Reveal>
@@ -93,12 +93,12 @@ export default function About() {
         </RevealGroup>
       </Section>
 
-      {/* Founders — the two of us handle every enquiry */}
+      {/* Founders: the two of us handle every enquiry */}
       <Section className="bg-surface/30">
         <SectionHeading
           eyebrow="Leadership"
           title="Two founders, zero middlemen"
-          intro="Every business enquiry comes straight to one of us — call, WhatsApp or email either founder directly, 8 AM to 8 PM, every day of the week. (Psst — say hi to our avatars, they're friendly.)"
+          intro="Every business enquiry comes straight to one of us. Call, WhatsApp or email either founder directly, 8 AM to 8 PM, every day of the week. (Psst, say hi to our avatars, they're friendly.)"
           align="center"
           className="mx-auto"
         />

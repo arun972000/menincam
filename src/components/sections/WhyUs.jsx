@@ -3,7 +3,7 @@ import Icon from '../ui/Icon';
 import { RevealGroup, RevealItem } from '../ui/Reveal';
 import { whyUs } from '../../data/studio';
 
-/** Value-prop grid — the reasons people choose Men in Cam. */
+/** Value-prop grid: the reasons people choose Men in Cam. */
 export default function WhyUs() {
   return (
     <Section>

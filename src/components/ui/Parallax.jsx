@@ -4,7 +4,7 @@ import { usePrefersReducedMotion } from '../../hooks/useMediaQuery';
 
 /**
  * Scroll parallax: shifts its children vertically as the element travels through
- * the viewport, creating depth. Pure transform (GPU) — no layout cost. `speed`
+ * the viewport, creating depth. Pure transform (GPU), no layout cost. `speed`
  * is the fraction of travel (positive = moves up as you scroll = "further
  * back"; negative = moves down = "closer"). No-op under reduced-motion.
  */

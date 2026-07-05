@@ -4,7 +4,7 @@ import { useIsCompact } from '../../hooks/useMediaQuery';
 
 /**
  * App-style overlay container. On compact screens (< lg) it's a native-feeling
- * bottom sheet — springs up from the bottom edge, drag the grab-handle down to
+ * bottom sheet: springs up from the bottom edge, drag the grab-handle down to
  * dismiss. On desktop the same content renders as a centered dialog. Content
  * scrolls internally; body scroll is locked while open.
  */
@@ -56,7 +56,7 @@ export default function BottomSheet({ open, onClose, label, children }) {
               }}
               className="fixed inset-x-0 bottom-0 z-[70] rounded-t-[1.75rem] border-t border-line bg-surface pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-lift"
             >
-              {/* Grab handle — the drag target (content below scrolls freely). */}
+              {/* Grab handle: the drag target (content below scrolls freely). */}
               <div
                 onPointerDown={(e) => dragControls.start(e)}
                 className="cursor-grab touch-none px-6 pb-2 pt-3 active:cursor-grabbing"

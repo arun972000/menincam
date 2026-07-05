@@ -44,7 +44,7 @@ export function confettiBurst({ count = 120, duration = 1800 } = {}) {
   const W = window.innerWidth;
   const H = window.innerHeight;
 
-  // Two side "cannons" firing up and inwards — reads as a celebration without
+  // Two side "cannons" firing up and inwards: reads as a celebration without
   // covering the content the user is looking at.
   const particles = Array.from({ length: count }, (_, i) => {
     const fromLeft = i % 2 === 0;

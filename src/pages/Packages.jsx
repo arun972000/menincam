@@ -4,8 +4,20 @@ import Reveal, { RevealGroup, RevealItem } from '../components/ui/Reveal';
 import Button, { ArrowIcon } from '../components/ui/Button';
 import Icon from '../components/ui/Icon';
 import InquiryForm from '../components/forms/InquiryForm';
+import PackageBuilder from '../components/sections/PackageBuilder';
 import CTABand from '../components/sections/CTABand';
-import { collections, quoteAssurances, quoteCta } from '../data/packages';
+import { collections, quoteAssurances, quoteCta, collectionPresets } from '../data/packages';
+import { track } from '../lib/track';
+
+/** Pre-fill the custom builder with this collection's items and scroll to it. */
+function startFromCollection(id) {
+  const ids = collectionPresets[id];
+  if (ids) {
+    window.dispatchEvent(new CustomEvent('mic:builder-preset', { detail: { ids } }));
+    track('builder_preset', { collection: id });
+  }
+  document.getElementById('build')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 function CollectionCard({ c }) {
   return (
@@ -37,8 +49,8 @@ function CollectionCard({ c }) {
         ))}
       </ul>
 
-      {/* No price — a curiosity-driven CTA instead. */}
-      <div className="mt-8">
+      {/* No price shown: curiosity-driven CTAs instead. */}
+      <div className="mt-8 space-y-2">
         <Button
           href="#get-quote"
           variant={c.highlighted ? 'primary' : 'outline'}
@@ -46,6 +58,13 @@ function CollectionCard({ c }) {
         >
           Get {c.name} pricing <ArrowIcon />
         </Button>
+        <button
+          type="button"
+          onClick={() => startFromCollection(c.id)}
+          className="w-full rounded-full py-2 text-xs font-semibold text-muted transition-colors hover:text-gold"
+        >
+          Or start with {c.name} and customise it ↓
+        </button>
       </div>
     </div>
   );
@@ -56,13 +75,13 @@ export default function Packages() {
     <>
       <Seo
         title="Packages & Pricing"
-        description="Simple photo and video packages for any event — weddings, birthdays, parties and more. Send your date and get a clear quote from Men in Cam within 24 hours."
+        description="Simple photo and video packages for any event: weddings, birthdays, parties and more. Build your own package or pick one, then get a clear quote from Men in Cam within 24 hours."
         path="/packages"
       />
       <PageHeader
         eyebrow="Packages"
         title="Simple packages, made to fit your event"
-        intro="Pick the one closest to your event, then send us your date. We’ll reply with a clear price within 24 hours — no hidden charges."
+        intro="Pick the one closest to your event, or build your own below. We reply with a clear price within 24 hours, with no hidden charges."
         image="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=60"
       />
 
@@ -77,7 +96,10 @@ export default function Packages() {
         </RevealGroup>
       </section>
 
-      {/* Why no price list — reassurance + lead form */}
+      {/* Build-your-own package: pick, tweak, send for a quote */}
+      <PackageBuilder />
+
+      {/* Why no price list: reassurance + lead form */}
       <section id="get-quote" className="scroll-mt-24 border-t border-line/60 bg-surface/30 py-20">
         <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-2">
           <Reveal>
@@ -106,7 +128,7 @@ export default function Packages() {
             </div>
           </Reveal>
 
-          {/* Embedded quote form — captures the lead right here */}
+          {/* Embedded quote form: captures the lead right here */}
           <Reveal delay={0.1}>
             <h3 className="mb-5 font-serif text-2xl text-ivory">Get your price</h3>
             <InquiryForm />
@@ -117,7 +139,7 @@ export default function Packages() {
       <CTABand
         eyebrow="No obligation"
         title="Not sure which package fits?"
-        body="Tell us about your event and we’ll suggest the right option and a clear price — within 24 hours."
+        body="Tell us about your event and we’ll suggest the right option with a clear price, within 24 hours."
       />
     </>
   );
