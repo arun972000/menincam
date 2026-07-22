@@ -206,6 +206,38 @@ html.lenis body {
   overflow: hidden;
 }
 
+/*
+  Periodic sheen that sweeps across primary CTAs — a light glint that pulls the
+  eye to "Get a quote" every few seconds. Transform-only; disabled in Calm mode
+  (and by the global reduced-motion rule).
+*/
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 -45%;
+  width: 45%;
+  background: linear-gradient(105deg, transparent, rgb(255 255 255 / 0.35), transparent);
+  animation: btn-shine-sweep 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+html[data-motion='reduced'] .btn-shine::after {
+  animation: none;
+  opacity: 0;
+}
+@keyframes btn-shine-sweep {
+  0%,
+  68% {
+    transform: translateX(0) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(420%) skewX(-20deg);
+  }
+}
+
 /* Hide scrollbars on horizontal strips while keeping them scrollable. */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

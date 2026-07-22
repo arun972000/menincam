@@ -58,8 +58,8 @@ export const contact = {
 };
 
 export const social = {
-  // TODO: replace with real handles/links.
-  instagram: 'https://instagram.com/',
+  // TODO: replace remaining handles/links with the real ones.
+  instagram: 'https://instagram.com/menincam',
   instagramHandle: '@menincam',
   youtube: 'https://youtube.com/',
   facebook: 'https://facebook.com/',

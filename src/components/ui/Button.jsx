@@ -16,7 +16,7 @@ const sizes = {
 
 const variants = {
   primary:
-    'bg-gold text-white hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-12px_rgb(var(--c-gold)/0.6)]',
+    'btn-shine bg-gold text-white hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-12px_rgb(var(--c-gold)/0.6)]',
   outline:
     'border border-gold/60 text-ivory hover:border-gold hover:-translate-y-0.5 hover:bg-gold/10',
   // text-ink (not white): teal is BRIGHT in Midnight and DARK in Daylight, and

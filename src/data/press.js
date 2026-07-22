@@ -1,21 +1,5 @@
-// Trust strip + "trusted by" names. PLACEHOLDER names, rendered as simple text
-// marks (no copyrighted logos shipped). Swap for real mentions when you have them.
-export const press = [
-  'WeddingSutra',
-  'WedMeGood',
-  'Eventbrite',
-  'Local Business Awards',
-  'Google Reviews',
-  'JustDial',
-];
-
-export const awards = [
-  { year: '2024', title: 'Top-rated event photographers · Chennai' },
-  { year: '2023', title: '5-star rated by 500+ clients' },
-  { year: '2022', title: 'Best value photo + video team' },
-];
-
 // "Trusted at" places for social proof: covers all kinds of venues.
+// (Review-site marks were intentionally removed — no fabricated social proof.)
 export const venues = [
   'Hotels & banquet halls',
   'Convention centres',

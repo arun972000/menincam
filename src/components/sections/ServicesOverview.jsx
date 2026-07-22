@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { SectionHeading } from '../ui/Section';
 import Icon from '../ui/Icon';
 import LazyImage from '../ui/LazyImage';
+import Tilt from '../ui/Tilt';
 import Button, { ArrowIcon } from '../ui/Button';
 import { RevealGroup, RevealItem } from '../ui/Reveal';
 import { usePrefersReducedMotion } from '../../hooks/useMediaQuery';
@@ -200,7 +201,9 @@ function HorizontalTrack() {
           </div>
 
           {servicesOverview.map((s, i) => (
-            <ServiceCard key={s.id} s={s} index={i} className="h-[26rem] w-[20rem] shrink-0" />
+            <Tilt key={s.id} className="shrink-0">
+              <ServiceCard s={s} index={i} className="h-[26rem] w-[20rem]" />
+            </Tilt>
           ))}
         </motion.div>
       </div>

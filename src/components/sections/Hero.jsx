@@ -27,10 +27,14 @@ const FRAMES = [
 
 const WORDS = ['weddings', 'birthdays', 'parties', 'every event'];
 
+// Honest trust chips — no fabricated review numbers. "live" renders a pulsing
+// dot: we really are taking bookings for the current month.
+const MONTH = new Date().toLocaleString('en', { month: 'long' });
 const TRUST = [
-  { icon: 'sparkles', label: '1,200+ events' },
+  { icon: 'live', label: `Now booking ${MONTH}` },
   { icon: 'film', label: 'Photo + video' },
   { icon: 'pin', label: 'We travel anywhere' },
+  { icon: 'clock', label: 'Quick delivery' },
 ];
 
 function srcset(base) {
@@ -261,7 +265,14 @@ export default function Hero() {
                 key={t.label}
                 className="flex items-center gap-2 rounded-full bg-black/35 px-3.5 py-1.5 text-sm text-white/90 backdrop-blur-sm"
               >
-                <Icon name={t.icon} className="h-4 w-4 text-gold" />
+                {t.icon === 'live' ? (
+                  <span className="relative grid h-3.5 w-3.5 place-items-center" aria-hidden="true">
+                    <span className="absolute h-3 w-3 animate-ping rounded-full bg-gold/60" />
+                    <span className="h-2 w-2 rounded-full bg-gold" />
+                  </span>
+                ) : (
+                  <Icon name={t.icon} className="h-4 w-4 text-gold" />
+                )}
                 {t.label}
               </li>
             ))}

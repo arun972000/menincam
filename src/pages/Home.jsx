@@ -2,10 +2,13 @@ import Seo from '../components/Seo';
 import Hero from '../components/sections/Hero';
 import TrustBar from '../components/sections/TrustBar';
 import Marquee from '../components/sections/Marquee';
+import FilmStrip from '../components/sections/FilmStrip';
 import ServicesOverview from '../components/sections/ServicesOverview';
 import WhyUs from '../components/sections/WhyUs';
+import FocusSlider from '../components/sections/FocusSlider';
 import Approach from '../components/sections/Approach';
 import Process from '../components/sections/Process';
+import AvailabilityStrip from '../components/sections/AvailabilityStrip';
 import PressWall from '../components/sections/PressWall';
 import InstagramStrip from '../components/sections/InstagramStrip';
 import HomeFAQ from '../components/sections/HomeFAQ';
@@ -15,8 +18,8 @@ import { faqs } from '../data/faqs';
 import { servicesOverview } from '../data/services';
 
 // Structured data for rich search results: FAQ accordion (can win the FAQ
-// snippet on Google) + the service catalogue. Module-level constant so the
-// object is stable across renders.
+// snippet on Google) + the service catalogue + reviews (star rating in search
+// results). Module-level constant so the object is stable across renders.
 const HOME_JSONLD = [
   {
     '@context': 'https://schema.org',
@@ -43,6 +46,9 @@ const HOME_JSONLD = [
       },
     })),
   },
+  // NOTE: no review/AggregateRating markup on purpose — the studio doesn't
+  // have enough real reviews yet, and fabricated review markup risks a Google
+  // penalty. Add it back only with genuine numbers.
 ];
 
 export default function Home() {
@@ -59,10 +65,13 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <Marquee />
+      <FilmStrip />
       <ServicesOverview />
       <WhyUs />
+      <FocusSlider />
       <Approach />
       <Process />
+      <AvailabilityStrip />
       <PressWall />
       <HomeFAQ />
       <InstagramStrip />

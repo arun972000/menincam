@@ -1,0 +1,12 @@
+{
+  "name": "Men in Cam — Photo & Video",
+  "short_name": "Men in Cam",
+  "description": "Photos & video for every event. Send your date, get a quick quote.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0D",
+  "theme_color": "#0B0B0D",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
