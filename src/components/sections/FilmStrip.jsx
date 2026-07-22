@@ -14,8 +14,11 @@ import { services } from '../../data/services';
 const FRAMES = services.slice(0, 8).map((s) => ({ src: s.image, alt: s.alt, label: s.title }));
 
 function Sprockets() {
+  // overflow-hidden is load-bearing: 24 fixed holes are wider than a phone
+  // screen, and without clipping they widen the whole document (breaking
+  // mobile layout scale). Extra holes simply clip at the edge, like real film.
   return (
-    <div className="flex justify-between gap-2 px-3 py-2" aria-hidden="true">
+    <div className="flex justify-between gap-2 overflow-hidden px-3 py-2" aria-hidden="true">
       {Array.from({ length: 24 }).map((_, i) => (
         <span key={i} className="h-2.5 w-3.5 shrink-0 rounded-[3px] bg-white/15" />
       ))}

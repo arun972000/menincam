@@ -66,6 +66,24 @@ html[data-accent='rose'] {
     /* Native form controls (date picker, selects) match the active theme. */
     color-scheme: dark;
   }
+
+  /*
+    Hard guard against horizontal page overflow: any child that spills wider
+    than the viewport (decorative strips, off-screen animations) gets clipped
+    instead of widening the document — which on mobile Chrome rescales the
+    whole layout and breaks rendering. `clip` (unlike `hidden`) doesn't create
+    a scroll container, so position: sticky keeps working.
+  */
+  html,
+  body {
+    overflow-x: clip;
+  }
+  @supports not (overflow: clip) {
+    html,
+    body {
+      overflow-x: hidden;
+    }
+  }
   html.theme-light {
     color-scheme: light;
   }
